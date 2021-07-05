@@ -24,3 +24,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="<?php echo RACINE_SITE; ?>/js/scripts.js"></script>
+<!-- Datatables  -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>

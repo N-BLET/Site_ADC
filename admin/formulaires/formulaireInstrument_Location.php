@@ -39,13 +39,13 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!Instrument_LocationRepo::insert($instruLoc))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouvel instrument de location a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument_Location.php?id=" . $instruLoc->GetIdInstrument());
+				
+				header("location: ".RACINE_SITE."/admin/tableaux/instrument_Locations.php?Validation1");
 		} else {
 			if (!Instrument_LocationRepo::update($instruLoc))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument_Location.php?id=" . $instruLoc->GetIdInstrument());
+				header("location: ".RACINE_SITE."/admin/tableaux/instrument_Locations.php?Validation2");
 		}
 	} else
 		$message = "<div class=\"alert alert-warning  alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

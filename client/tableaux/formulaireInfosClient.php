@@ -1,9 +1,12 @@
 <?php
-require_once("../../includes/page.inc.php");
+require_once("../../constante.php");
+require_once(pathGetSession . "/connexion/gestionSession.php");
 require_once("../header_footer/header.php");
 
 // Gestion des variables de la page
 $message = "";
+$client = $_SESSION["Client"];
+$idClient = $client->getIdClient();
 $lesVilles=VilleRepo::getVilles();
 
 if (isset($_SESSION["Client"])) {
@@ -77,7 +80,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		?>
 
 		<form action="formulaireInfosClient.php" method="post">
-			<input type="hidden" id="id" name="id" value="<?php echo $client->getIdClient() ?>" />
+			<input type="hidden" id="id" name="id" value="<?php echo $idClient ?>" />
 
 			<div class="form-group">
 				<label for="nom">NOM :</label>
@@ -131,7 +134,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			</div>
             <div class="row g-2">
                 <div class="col-md-6 text-end">
-				    <a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/infosClient.php'>Annuler</a>
+				    <a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/tableaux/infosClient.php'>Annuler</a>
 				</div>
 				<div class="col-md-6 text-start">
 					<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">

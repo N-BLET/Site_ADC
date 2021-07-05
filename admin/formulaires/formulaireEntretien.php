@@ -39,14 +39,12 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!EntretienRepo::insert($entretien))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre entretien a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireEntretien.php?entretienOk");
+				header("location: ".RACINE_SITE."/admin/tableaux/entretiens.php?Validation1");
 		} else {
 			if (!EntretienRepo::update($entretien))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre entretien a bien été modifié !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireEntretien.php?id=" . $entretien->GetIdEntretien());
+				header("location: ".RACINE_SITE."/admin/tableaux/entretiens.php?Validation2");
 		}
 	} else
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

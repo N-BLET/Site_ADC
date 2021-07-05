@@ -37,14 +37,12 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!VilleRepo::insert($ville))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Une ville a bien été rajoutée !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireVille.php?id=" . $ville->GetIdVille());
+				header("location: ".RACINE_SITE."/admin/tableaux/villes.php?Validation1");
 		} else {
 			if (!VilleRepo::update($ville))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de la ville ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireVille.php?id=" . $ville->GetIdVille());
+				header("location: ".RACINE_SITE."/admin/tableaux/villes.php?Validation2");
 		}
 	} else
 		$message = "<div class=\"alert alert-warning\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

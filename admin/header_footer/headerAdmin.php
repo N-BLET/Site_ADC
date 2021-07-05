@@ -16,6 +16,8 @@
 	<!-- Google fonts-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- CDN datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
 	<!-- Core theme CSS (includes Bootstrap)-->
 	<link href="<?php echo RACINE_SITE; ?>/css/styles.css" rel="stylesheet" />
 </head>

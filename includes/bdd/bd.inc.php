@@ -1,14 +1,15 @@
 <?php
 
-require("config.inc.php");
-
 function connexionBD()
 {
 	try {
-		$BD = new PDO("mysql:host=" . BD_HOST . ";dbname=" . BD_BASE . ";charset=UTF8", BD_USER, BD_PASSWORD);
+		$BD = new PDO("mysql:host=127.0.0.1; dbname=nfa021Projet; charset=UTF8", "root", "CnamData");
 		return $BD;
 	} catch (Exception $e) {
-		echo "<p> Problème de connexion à la base de données. </p>";
+		echo "<pre>";
+		echo $e;
+		echo "</pre>";
+		//echo "<p> Problème de connexion à la base de données. </p>";
 		exit();
 	}
 }

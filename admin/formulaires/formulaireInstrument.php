@@ -44,14 +44,12 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!InstrumentRepo::insert($instrument))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">L'instrument de votre client a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument.php?id=" . $instrument->GetIdInstrument());
+				header("location: ".RACINE_SITE."/admin/tableaux/instruments.php?Validation1");
 		} else {
 			if (!InstrumentRepo::update($instrument))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de l'instrument ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument.php?id=" . $instrument->GetIdInstrument());
+				header("location: ".RACINE_SITE."/admin/tableaux/instruments.php?Validation2");
 		}
 	} else
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

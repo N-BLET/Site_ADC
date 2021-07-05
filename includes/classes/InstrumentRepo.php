@@ -3,9 +3,13 @@ require_once(__DIR__ . '/../bdd/bd.inc.php');
 
 class InstrumentRepo
 {
+	public static $BD;
 	public static function getInstrument(int $idInstrument)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
+		
 
 		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, fkIdClient " .
 				"FROM `INSTRUMENT` " .
@@ -27,7 +31,10 @@ class InstrumentRepo
 
 	public static function getInstruments()
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
+		
 
         $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, fkIdClient " .
         "FROM `INSTRUMENT` ";
@@ -59,14 +66,15 @@ class InstrumentRepo
 
 	public static function getInstruSelonClient(int $idClient)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
         $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, fkIdClient " .
 		"FROM `INSTRUMENT` " .
 		"JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
 		"WHERE `CLIENT`.idClient = :id;";
-
-		echo $idClient;
+		
 		$instruments  = array();
 
 		if ($requete = $BD->prepare($SQL)) {
@@ -84,7 +92,9 @@ class InstrumentRepo
 
     public static function insert(Instrument $instrument)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$data = [
 			'idInstrument' => $instrument->getIdInstrument(),
@@ -109,7 +119,9 @@ class InstrumentRepo
 	
     public static function update(Instrument $instrument)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$data = [
 			'idInstrument' => $instrument->getIdInstrument(),
@@ -133,7 +145,9 @@ class InstrumentRepo
 
     public static function delete(Instrument $instrument)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$data = [
 			'idInstrument' => $instrument->getIdInstrument()

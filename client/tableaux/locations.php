@@ -1,11 +1,16 @@
 <?php
 require_once("../../connexion/gestionSession.php");
-require_once("../header_footer/header.php");
-
 // Gestion des variables de la page
 $client = $_SESSION["Client"];
 $idClient = $client->getIdClient();
+echo "<pre>";
+var_dump($client);
+echo "</pre>";
 $lesLocations = LocationRepo::getLocationSelonClient($idClient);
+require_once("../header_footer/header.php");
+
+
+
 ?>
 
 <section class="container">

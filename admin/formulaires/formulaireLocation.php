@@ -49,14 +49,12 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!LocationRepo::insert($location))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouveau contrat de loaction a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireLocation.php?idLocation=" . $location->GetIdLocation());
+				header("location: ".RACINE_SITE."/admin/tableaux/locations.php?Validation1");
 		} else {
 			if (!LocationRepo::update($location))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de votre contrat de location ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireLocation.php?idLocation=" . $location->GetIdLocation());
+				header("location: ".RACINE_SITE."/admin/tableaux/locations.php?Validation2");
 		}
 	} else
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

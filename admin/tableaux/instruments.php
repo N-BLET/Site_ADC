@@ -13,6 +13,14 @@ if (isset($_GET["idSuppression"])) {
 }
 
 $lesInstruments = InstrumentRepo::getInstruments();
+$message = "";
+
+if (isset($_GET["Validation1"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">L'instrument de votre client a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["Validation2"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de l'instrument ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
 ?>
 
 <section class="page-section" id="instruments">	

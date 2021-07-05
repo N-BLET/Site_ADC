@@ -13,6 +13,15 @@ if (isset($_GET["idSuppression"])) {
 }
 
 $lesinstruLocs = Instrument_LocationRepo::getInstruments_Location();
+$message = "";
+
+if (isset($_GET["Validation1"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouvel instrument de location a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["Validation2"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Le changement d'informations sur votre instrument ont bien été pris en compte.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+
 ?>
 <section class="page-section" id="instruments">	
 	<div class="container">

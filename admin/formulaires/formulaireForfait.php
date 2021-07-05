@@ -33,15 +33,15 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!ForfaitRepo::insert($forfait)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			}else {
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Votre nouveau forfait a bien été enregistré !</strong><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireForfait.php?id=" . $forfait->GetIdForfait());
+				
+				header("location: ".RACINE_SITE."/admin/tableaux/forfaits.php?Validation1");
 			}  
 		} else {
 			if (!ForfaitRepo::update($forfait))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Votre forfait a bien été modifié !</strong><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireForfait.php?idForfait=" . $forfait->GetIdForfait());
+				
+				header("location: ".RACINE_SITE."/admin/tableaux/forfaits.php?Validation2");
 		}
 	} else
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

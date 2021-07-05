@@ -1,6 +1,7 @@
 <?php
-require_once("../../gestionSession.php");
-require_once("../header_footer/header.php");
+require("./../../constante.php");
+require_once(pathGetSession . "/connexion/gestionSession.php");
+require_once(pathGetSession . "/client/header_footer/header.php");
 
 // Gestion des variables de la page
 $client = $_SESSION["Client"];
@@ -66,7 +67,7 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
         }
 		?>
 		<div class="text-center mb-3">
-			<a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/connexion/accueil.php'>Retour</a>
+			<a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/accueil.php'>Retour</a>
 		</div>
 	</div>
 </section>

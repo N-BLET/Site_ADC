@@ -1,6 +1,5 @@
 <?php
-require("./../../constante.php");
-require_once(pathGetSession . "/connexion/gestionSession.php");
+require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
 
 if (isset($_GET["idSuppression"])) {
@@ -15,6 +14,17 @@ if (isset($_GET["idSuppression"])) {
 
 $lesClients = ClientRepo::getClients();
 $message = "";
+
+
+if (isset($_GET["SuppressionOk"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre client a bien été supprimé !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["Validation1"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouveau client a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["Validation2"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de votre client ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
 ?>
 
 <section class="page-section" id="clients">	
@@ -36,7 +46,7 @@ $message = "";
 		</form>
 
 		<div class="table-responsive">
-			<table class="table table-striped bg-light text-center">
+			<table id="clients" class="table table-striped bg-light text-center">
 				<tr class="table-dark">
 					<th>NOM</th>
 					<th>PRÉNOM</th>
@@ -83,6 +93,11 @@ $message = "";
 		</div>
 	</div>
 </section>
+<script type="text/javascript">
+	$("#clients").datatables({
+
+	});
+</script>
 <?php
 	require_once("../header_footer/footerAdmin.php");
 ?>

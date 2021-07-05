@@ -13,6 +13,14 @@ if (isset($_GET["idSuppression"])) {
 }
 
 $lesForfaits = ForfaitRepo::getForfaits();
+$message = "";
+
+if (isset($_GET["Validation1"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Votre nouveau forfait a bien été enregistré !</strong><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["Validation2"]))
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Votre forfait a bien été modifié !</strong><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
 ?>
 
 <section class="page-section" id="forfaits">	
