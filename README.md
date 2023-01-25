@@ -21,5 +21,5 @@ Voici quelques informations complémentaires sur ce site
 * La [présentation](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) du site
 * Le [MCD](https://github.com/N-BLET/Site_ADC/blob/main/Infos/MCD_NFA021_ADC.png) "Modèle Conceptuel des Donnnées"
 * Le [MPD](https://github.com/N-BLET/Site_ADC/blob/main/Infos/MPD_NFA021_ADC.png) "Modèle Physique des Données"
-* Le fichier [SQL de création](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) de la base de données
+* Le fichier [SQL de création](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Script%20creation_nfa021Projet.sql) de la base de données
 * Le fichier [SQL de peuplement](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) de la base de données
