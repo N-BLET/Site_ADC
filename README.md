@@ -19,7 +19,7 @@ Le thème du site web est laissé à votre convenance, mais les points suivants 
 
 Voici quelques informations complémentaires sur ce site
 * une présentation de du site
-* Le MCD "Modèle Conceptuel des Donnnées"
-* Le MPD "Modèle Physique des Données"
-* Le fichier SQL de création de la base de données
-* Le fichier SQL de peuplement de la base de données
+* Le [MCD](https://www.csszengarden.com/tr/francais/) "Modèle Conceptuel des Donnnées" [CSSZenGarden](https://www.csszengarden.com/tr/francais/)
+* Le [MPD](https://www.csszengarden.com/tr/francais/) "Modèle Physique des Données"
+* Le fichier [SQL de création](https://www.csszengarden.com/tr/francais/) de la base de données
+* Le fichier [SQL de peuplement](https://www.csszengarden.com/tr/francais/) de la base de données
