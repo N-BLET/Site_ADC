@@ -14,7 +14,7 @@ Le thème du site web est laissé à votre convenance, mais les points suivants 
 - Gestion d’au moins deux profils avec des droits différents (exemple administrateur et client),
 - Utilisation d’une base de données comportant au moins cinq tables,
 - Utilisation de requêtes variées (lecture, insertion, modification, suppression) et de formulaires.
-
+</br></br>
 ### INFORMATIONS COMPLÉMENTAIRES :
 
 Voici quelques informations complémentaires sur ce site
