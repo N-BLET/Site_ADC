@@ -18,8 +18,8 @@ Le thème du site web est laissé à votre convenance, mais les points suivants 
 ### INFORMATIONS COMPLÉMENTAIRES :
 
 Voici quelques informations complémentaires sur ce site
-* une présentation de du site
-* Le [MCD](https://www.csszengarden.com/tr/francais/) "Modèle Conceptuel des Donnnées" [CSSZenGarden](https://www.csszengarden.com/tr/francais/)
-* Le [MPD](https://www.csszengarden.com/tr/francais/) "Modèle Physique des Données"
-* Le fichier [SQL de création](https://www.csszengarden.com/tr/francais/) de la base de données
-* Le fichier [SQL de peuplement](https://www.csszengarden.com/tr/francais/) de la base de données
+* La [présentation](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) du site
+* Le [MCD](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) "Modèle Conceptuel des Donnnées"
+* Le [MPD](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) "Modèle Physique des Données"
+* Le fichier [SQL de création](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) de la base de données
+* Le fichier [SQL de peuplement](https://github.com/N-BLET/Site_ADC/blob/main/Infos/Rapport%20projet.pdf) de la base de données
