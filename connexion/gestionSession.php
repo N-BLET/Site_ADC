@@ -1,21 +1,16 @@
 <?php
-/*echo basename();
-echo pathinfo();
-echo realpath();*/
-echo dirname(__FILE__);
-require_once('C:/Program Files/UwAmp/www/NFA021_ADC/includes/page.inc.php');
-
+require_once('C:/wamp64/www/NFA021-ADC/includes/page.inc.php');
 
 session_start();
 
 if ($_SESSION["Client"] == null) {
-	header("location: ".RACINE_SITE."/connexion/index.php?pasAutorise");
+	header("location: /connexion/index.php?pasAutorise");
 	exit();
 }
 
 $clientConnecte = $_SESSION["Client"];
 
 if (!$clientConnecte->getEstValide()) {
-	header("location: ".RACINE_SITE."/connexion/index.php?pasClient");
+	header("location: /connexion/index.php?pasClient");
 	exit();
-} 
+}

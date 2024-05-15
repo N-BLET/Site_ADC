@@ -46,18 +46,18 @@ if (isset($_POST["btnInscription"])) {
 		$client->setFkIdVille($fkIdVille);
 
 		if (!verifEmail($email)) {
-			header("location: ".RACINE_SITE."/connexion/inscription.php?emailNonConforme3");
+			header("location: /connexion/inscription.php?emailNonConforme3");
 		}
 
 		if (verifUniqEmail($email)) {
-			header("location: ".RACINE_SITE."/connexion/inscription.php?emailNonConforme4");
+			header("location: /connexion/inscription.php?emailNonConforme4");
 			exit;
 		}
 		$client->setEmail($email);
 
 		$indice = testpassword($password);
 		if ($indice<100) {
-			header("location: ".RACINE_SITE."/connexion/inscription.php?motDePasseNonConforme5");
+			header("location: /connexion/inscription.php?motDePasseNonConforme5");
 		}
 		
 		$mdpClient = password_hash($password, PASSWORD_DEFAULT);
@@ -67,10 +67,10 @@ if (isset($_POST["btnInscription"])) {
 			$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 		}else {
 			// Envoi du mail
-			$contenu = "Merci de valider votre mail en cliquant sur le lien suivant : http://localhost".RACINE_SITE."/connexion/validation.php?jeton=" . $client->getJetonValidation();
+			$contenu = "Merci de valider votre mail en cliquant sur le lien suivant : http://localhost/nfa021-adc/connexion/validation.php?jeton=" . $client->getJetonValidation();
 
 			if (envoyerMail($client->getEmail(), "Valider votre inscription", $contenu)) {
-				header("location: ".RACINE_SITE."/connexion/inscription.php?inscriptionOK");
+				header("location: /connexion/inscription.php?inscriptionOK");
 			}
 		}
 
@@ -111,12 +111,12 @@ if (isset($_POST["btnInscription"])) {
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link text-ligth" href="<?php echo RACINE_SITE; ?>/index.php#services">Services</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#entretien">Entretien</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#location">Location</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#portfolio">Vente</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#equipe">L'équipe</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#contact">Contact</a></li>
+					<li class="nav-item"><a class="nav-link text-ligth" href="/index.php#services">Services</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#entretien">Entretien</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#location">Location</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#portfolio">Vente</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#equipe">L'équipe</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#contact">Contact</a></li>
 				</ul>
 				<a class="btn btn-primary btn-social mx-2" href="https://www.facebook.com/latelierdesclarinettes"><i class="fab fa-facebook-f"></i></a>
 			</div>
@@ -187,7 +187,7 @@ if (isset($_POST["btnInscription"])) {
 		</form>
 
 		<div class="text-center">
-			<a href="<?php echo RACINE_SITE; ?>/connexion/index.php">Retour connexion</a>
+			<a href="/connexion/index.php">Retour connexion</a>
 		</div>
 	</div>
 		
@@ -196,7 +196,7 @@ if (isset($_POST["btnInscription"])) {
 			<h4>Atelier des clarinettes</h4>
 			<p>Le Bourg<br>42460 JARNOSSE</br></p>
 			<p>Tél : 06.12.41.63.47</p>
-			<p><a href="<?php echo RACINE_SITE; ?>/index.php">Retour sur le site</a></p>
+			<p><a href="/index.php">Retour sur le site</a></p>
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-lg-12 my-3 my-lg-0">

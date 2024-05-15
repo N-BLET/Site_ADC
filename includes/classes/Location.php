@@ -5,26 +5,27 @@ class Location
 	private $idLocation;
 	private $dateLocation;
 	private $finLocation;
-	private $fkIdInstruLoc;
 	private $fkIdForfait;
 	private $fkIdClient;
-	private $instrument_Location;
+	private $fkIdInstrument;
 	private $forfait;
 	private $client;
+	private $instrument;
 
 
 	/* Constructeur */
-	public function __construct(int $idLocation, string $dateLocation, string $finLocation, int $fkIdForfait, int $fkIdInstruLoc, int $fkIdClient)
+	public function __construct(int $idLocation, string $dateLocation, string $finLocation, int $fkIdForfait, int $fkIdClient, int $fkIdInstrument)
 	{
 		$this->idLocation = $idLocation;
-		$this->dateLocation = $dateLocation;
-		$this->finLocation = $finLocation;
+		$this->dateLocation = strtotime($dateLocation);
+		$this->finLocation = strtotime($finLocation);
 		$this->fkIdForfait = $fkIdForfait;
-		$this->fkIdInstruLoc = $fkIdInstruLoc;
+		$this->fkIdInstrument = $fkIdInstrument;
 		$this->fkIdClient = $fkIdClient;
-		$this->instrument_Location = Instrument_LocationRepo::getInstrument_Location($fkIdInstruLoc);
 		$this->forfait = ForfaitRepo::getForfait($fkIdForfait);
 		$this->client = ClientRepo::getClient($fkIdClient);
+		$this->instrument = InstrumentRepo::getInstrument($fkIdInstrument);
+		//Instrument_LocationRepo::getInstrument_Location($fkIdInstruLoc)->setStatutLocation(true);
 	}
 
 	/* Getters/Setters */
@@ -38,13 +39,17 @@ class Location
 		$this->idLocation = $idLocation;
 	}
 
-
 	public function getDateLocation(): string
 	{
 		return $this->dateLocation;
 	}
 
-	public function getDateLocationISO(): string
+	public function getDateLocationTab(): string
+	{
+		return date("d/m/Y",$this->dateLocation);
+	}
+
+	public function getDateLocationForm(): string
 	{
 		return date("Y-m-d", $this->dateLocation);
 	}
@@ -56,12 +61,17 @@ class Location
 
 	public function getFinLocation(): string
 	{
-		return $this->finLocation;
+		return $this->dateLocation;
 	}
 
-	public function getFinLocationISO(): string
+	public function getFinLocationTab(): string
 	{
-		return date("Y-m-d", $this->dateLocation);
+		return date("d/m/Y", $this->finLocation);
+	}
+
+	public function getFinLocationForm(): string
+	{
+		return date("Y-m-d", $this->finLocation);
 	}
 
 	public function setFinLocation(string $finLocation)
@@ -69,14 +79,14 @@ class Location
 		$this->finLocation = $finLocation;
 	}
 
-	public function getFkIdInstruLoc(): int
+	public function getFkIdInstrument(): int
 	{
-		return $this->fkIdInstruLoc;
+		return $this->fkIdInstrument;
 	}
 
-	public function setFkIdInstruLoc(int $fkIdInstruLoc)
+	public function setFkIdInstrument(int $fkIdInstrument)
 	{
-		$this->fkIdInstruLoc = $fkIdInstruLoc;
+		$this->fkIdInstrument = $fkIdInstrument;
 	}
 
 	public function getFkIdForfait(): int
@@ -99,28 +109,16 @@ class Location
 		$this->fkIdClient = $fkIdClient;
 	}
 
-
-	public function getClient(): Client
+	public function getClient(): ?Client
 	{
 		return $this->client;
 	}
 
 	public function setClient(Client $newClient)
 	{
-		$this->Client = $newClient;
+		$this->client = $newClient;
 	}
-
-	public function getInstrument_Location(): Instrument_Location
-	{
-		return $this->instrument_Location;
-	}
-
-	public function setInstrument_Location(Instrument_Location $newInstrument_Location)
-	{
-		$this->instrument_Location = $newInstrument_Location;
-	}
-
-	public function getForfait(): Forfait
+		public function getForfait(): ?Forfait
 	{
 		return $this->forfait;
 	}
@@ -128,6 +126,16 @@ class Location
 	public function setForfait(Forfait $newForfait)
 	{
 		$this->forfait = $newForfait;
+	}
+
+	public function getInstrument(): Instrument
+	{
+		return $this->instrument;
+	}
+
+	public function setInstrument(Instrument $newInstrument)
+	{
+		$this->forfait = $newInstrument;
 	}
 
 }

@@ -12,6 +12,7 @@ class Client
 	private $profilAdmin;
 	private $estValide;
 	private $jetonValidation;
+	private $fkIdVille;
 	private $ville;
 	private $status;
 

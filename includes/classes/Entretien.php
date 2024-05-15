@@ -7,17 +7,25 @@ class Entretien
 	private $descriptionEntretien;
 	private $prixEntretien;
 	private $instrument;
+	private $client;
 
 
 	/* Constructeur */
-	public function __construct(int $idEntretien, string $dateEntretien, string $descriptionEntretien, float $prixEntretien, int $fkIdInstrument)
+	public function __construct(int $idEntretien, string $dateEntretien, string $descriptionEntretien, ?float $prixEntretien, int $fkIdInstrument, int $fkIdClient)
 	{
 		$this->idEntretien = $idEntretien;
 		$this->dateEntretien = strtotime($dateEntretien);
 		$this->descriptionEntretien = $descriptionEntretien;
 		$this->prixEntretien = $prixEntretien;
-		$this->fkIdInstrument = $fkIdInstrument;
-		$this->instrument = InstrumentRepo::getInstrument($fkIdInstrument);
+
+		// $this->fkIdInstrument = $fkIdInstrument ?? 0; // Remplace null par 0 si fkIdInstrument est null
+    	// $this->fkIdClient = $fkIdClient ?? 0; // Remplace null par 0 si fkIdClient est null
+
+		$this->instrument = ($fkIdInstrument !== null) ? InstrumentRepo::getInstrument($fkIdInstrument) : 0;
+		$this->client = ($fkIdClient !== null) ? ClientRepo::getClient($fkIdClient) : 0;
+
+		// $this->instrument = InstrumentRepo::getInstrument($fkIdInstrument) ?? 0;
+		// $this->client = ClientRepo::getClient($fkIdClient) ?? 0;
 	}
 
 	/* Getters/Setters */
@@ -35,22 +43,21 @@ class Entretien
 	{
 		return $this->dateEntretien;
 	}
-
-	public function getDateEntretienISO(): string
-	{
-		return date("Y-m-d", $this->dateEntretien);
-	}
-
-	public function getDateEntretienStr(): string
+	
+    public function getDateEntretienTab(): string
 	{
 		return date("d/m/Y", $this->dateEntretien);
+	}
+
+	public function getDateEntretienForm(): string
+	{
+		return date("Y-m-d", $this->dateEntretien);
 	}
 
 	public function setDateEntretien(string $dateEntretien)
 	{
 		$this->dateEntretien = $dateEntretien;
 	}
-
 
 	public function getDescriptionEntretien(): string
 	{
@@ -62,7 +69,7 @@ class Entretien
 		$this->descriptionEntretien = $descriptionEntretien;
 	}
 
-	public function getPrixEntretien(): float
+	public function getPrixEntretien(): ?float
 	{
 		return $this->prixEntretien;
 	}
@@ -70,16 +77,6 @@ class Entretien
 	public function setPrixEntretien(float $prixEntretien)
 	{
 		$this->prixEntretien = $prixEntretien;
-	}
-
-	public function getFkIdInstrument(): int
-	{
-		return $this->fkIdInstrument;
-	}
-
-	public function setFkIdInstrument(int $fkIdInstrument)
-	{
-		$this->fkIdEntretien = $fkIdInstrument;
 	}
 
 	public function getInstrument(): Instrument
@@ -90,6 +87,16 @@ class Entretien
 	public function setInstrument(Instrument $newInstrument)
 	{
 		$this->instrument = $newInstrument;
-	}	
+	}
+
+	public function getClient(): Client
+	{
+		return $this->client;
+	}
+
+	public function setClient(int $fkIdClient)
+	{
+		$this->client = $fkIdClient;
+	}
 
 }

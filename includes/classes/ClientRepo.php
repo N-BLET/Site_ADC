@@ -3,9 +3,12 @@ require_once(__DIR__ . '/../bdd/bd.inc.php');
 
 class ClientRepo
 {
+	public static $BD;
 	public static function getClient(int $idClient)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$SQL = "SELECT idClient, nom, prenom, adresse, telephone, email, password, profilAdmin, estValide, jetonValidation, fkIdVille " .
 				"FROM `CLIENT` " .
@@ -27,7 +30,9 @@ class ClientRepo
 
 	public static function getAdmin($profilAdmin)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$SQL = "SELECT idClient, nom, prenom, adresse, telephone, email, password, profilAdmin, estValide, jetonValidation, fkIdVille " .
 				"FROM `CLIENT` ";
@@ -55,7 +60,9 @@ class ClientRepo
 
 	public static function getClientSelonJeton(string $jeton)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$SQL = "SELECT idClient, nom, prenom, adresse, telephone, email, password, profilAdmin, estValide, jetonValidation, fkIdVille " .
 			"FROM `CLIENT` " .
@@ -78,7 +85,9 @@ class ClientRepo
 
 	public static function getClients()
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$SQL = "SELECT idClient, nom, prenom, adresse, telephone, email, password, profilAdmin, estValide, jetonValidation, fkIdVille " .
 				"FROM `CLIENT` ";
@@ -107,7 +116,9 @@ class ClientRepo
 	public static function authentification(string $email, string $password)
 	{
 		
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 		
 		$SQL = "SELECT idClient, nom, prenom, adresse, telephone, email, password, profilAdmin, estValide, jetonValidation, fkIdVille " .
 		"FROM `CLIENT` " .
@@ -130,7 +141,9 @@ class ClientRepo
 
 	public static function insert(Client $client)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$data = [
 			'nom' => strtoupper ($client->getNom()),
@@ -158,7 +171,9 @@ class ClientRepo
 
 	public static function update(Client $client)
 	{
-		$BD = connexionBD();
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
 
 		$data = [
 			'id' => $client->getIdClient(),
@@ -183,21 +198,73 @@ class ClientRepo
 		return false;
 	}
 
+	// public static function delete(Client $client)
+	// {
+	// 	if(empty ($BD)){
+	// 		$BD = connexionBD();
+	// 	} 
+
+	// 	$data = [
+	// 		'idClient' => $client->getIdClient()
+	// 	];
+
+	// 	$SQL = "DELETE FROM CLIENT WHERE idClient = :idClient;";
+	// 	if ($requete = $BD->prepare($SQL)) {
+	// 		if ($requete->execute($data)) {
+	// 			return true;
+	// 		} else
+	// 			afficherErreurPDO(__FILE__, $requete);
+	// 	}
+	// 	return false;
+	// }
+
 	public static function delete(Client $client)
-	{
-		$BD = connexionBD();
+{
+    if (empty($BD)) {
+        $BD = connexionBD();
+    } 
 
-		$data = [
-			'idClient' => $client->getIdClient()
-		];
+    try {
+        // Démarrer une transaction
+        $BD->beginTransaction();
 
-		$SQL = "DELETE FROM CLIENT WHERE idClient = :idClient;";
-		if ($requete = $BD->prepare($SQL)) {
-			if ($requete->execute($data)) {
-				return true;
-			} else
-				afficherErreurPDO(__FILE__, $requete);
-		}
-		return false;
-	}
+        // Supprimer d'abord les locations associées au client
+        $SQL_delete_locations = "DELETE FROM LOCATION WHERE fkIdClient = :idClient;";
+        $data_delete_locations = [
+            'idClient' => $client->getIdClient()
+        ];
+
+        $requete_delete_locations = $BD->prepare($SQL_delete_locations);
+        $requete_delete_locations->execute($data_delete_locations);
+
+        // Ensuite, supprimer les instruments associés au client
+        $SQL_delete_instruments = "DELETE FROM INSTRUMENT WHERE fkIdClient = :idClient;";
+        $data_delete_instruments = [
+            'idClient' => $client->getIdClient()
+        ];
+
+        $requete_delete_instruments = $BD->prepare($SQL_delete_instruments);
+        $requete_delete_instruments->execute($data_delete_instruments);
+
+        // Enfin, supprimer le client lui-même
+        $SQL_delete_client = "DELETE FROM CLIENT WHERE idClient = :idClient;";
+        $data_delete_client = [
+            'idClient' => $client->getIdClient()
+        ];
+
+        $requete_delete_client = $BD->prepare($SQL_delete_client);
+        $requete_delete_client->execute($data_delete_client);
+
+        // Valider la transaction
+        $BD->commit();
+
+        return true;
+    } catch (PDOException $e) {
+        // En cas d'erreur, annuler la transaction
+        $BD->rollback();
+        afficherErreurPDO(__FILE__, $e);
+        return false;
+    }
+}
+
 }

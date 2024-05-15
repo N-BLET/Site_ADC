@@ -15,30 +15,30 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="<?php echo RACINE_SITE; ?>/css/styles.css" rel="stylesheet" />
+	<link href="./../../css/styles.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="#page-top"><img src="../assets/img/logo.jpg" alt="Logo Atelier Des Clarinettes" /></a>
+                <a class="navbar-brand" href="#page-top"><img src="./../../assets/img/logo.jpg" alt="Logo Atelier Des Clarinettes" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link text-ligth" href="<?php echo RACINE_SITE; ?>/index.php#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#entretien">Entretien</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#location">Location</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#portfolio">Vente</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#equipe">L'équipe</a></li>
-                        <li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link text-ligth" href="/index.php#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="/index.php#entretien">Entretien</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="/index.php#location">Location</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="/index.php#portfolio">Vente</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="/index.php#equipe">L'équipe</a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="/index.php#contact">Contact</a></li>
                         <?php
                         if($_SESSION["Client"]){
                             if ($clientConnecte->getProfilAdmin()) {
-                                echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"".RACINE_SITE."/admin/index.php\">Administation</a></li>";
+                                echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"/admin/index.php\">Administation</a></li>";
                             }
                         }
                         ?>

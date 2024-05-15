@@ -1,5 +1,5 @@
 <?php
-require_once("../../connexion/gestionSession.php");
+require_once("./../../includes/page.inc.php");
 require_once("../header_footer/headerAdmin.php");
 
 if (isset($_GET["idSuppression"])) {
@@ -8,11 +8,27 @@ if (isset($_GET["idSuppression"])) {
 	$instrumentSuppression = InstrumentRepo::getInstrument($id);
 	if ($instrumentSuppression != null) {
 		if (!InstrumentRepo::delete($instrumentSuppression))
-			header("location: ".RACINE_SITE."/admin/tableaux/instruments.php?erreurSuppression");
+			header("location: /admin/tableaux/instruments.php?erreurSuppression");
 	}
 }
 
 $lesInstruments = InstrumentRepo::getInstruments();
+$message = "";
+
+if (isset($_GET["idSuppression"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">L'instrument a bien été supprimé !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
+
+if (isset($_GET["Validation1"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">L'instrument de votre client a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
+
+if (isset($_GET["Validation2"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de l'instrument ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
 ?>
 
 <section class="page-section" id="instruments">	
@@ -20,7 +36,7 @@ $lesInstruments = InstrumentRepo::getInstruments();
 		
 		<h2>Gestion des instruments</h2>
 
-		<p><a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/admin/formulaires/formulaireInstrument.php'>Ajouter</a></p>
+		<p><a class="btn btn-success" href='/admin/formulaires/formulaireInstrument.php'>Ajouter</a></p>
 
 		<form action="instruments.php" method="get" id="rechercheInstru">
 			<div class="row">
@@ -28,7 +44,7 @@ $lesInstruments = InstrumentRepo::getInstruments();
 					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-primary mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -39,7 +55,7 @@ $lesInstruments = InstrumentRepo::getInstruments();
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-primary mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -53,8 +69,7 @@ $lesInstruments = InstrumentRepo::getInstruments();
 					<th>MODÈLE</th>
 					<th>N° DE SÉRIE</th>
 					<th>DATE D'ACHAT</th>
-					<th></th>
-					<th></th>
+					<th colspan="2">ACTIONS</th>
 				</tr>
 				<?php
 				$tr ="";
@@ -66,9 +81,9 @@ $lesInstruments = InstrumentRepo::getInstruments();
 						$tr .= "<td>" . $instrument->GetMarque() . "</td>";
 						$tr .= "<td>" . $instrument->GetModele() . "</td>";
 						$tr .= "<td>" . $instrument->GetNumeroSerie() . "</td>";
-						$tr .= "<td>" . $instrument->getDateAchatStr() . "</td>";
-						$tr .= "<td><a href=" . RACINE_SITE . "/admin/formulaires/formulaireInstrument.php?id=" . $instrument->GetIdInstrument() . "'>Modifier</a></td>";
-						$tr .= "<td><a href=" . RACINE_SITE . "/admin/tableaux/instruments.php?idSuppression=" . $instrument->GetIdInstrument() . "'>Supprimer</a></td>";
+						$tr .= "<td>" . $instrument->getDateAchatTab() . "</td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireInstrument.php?id=" . $instrument->GetIdInstrument() . "'><i class=\"far fa-edit\"></a></td>";					
+						$tr .= "<td><a href='/admin/tableaux/tabInstruments.php?idSuppression=" . $instrument->GetIdInstrument() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}
 					echo $tr;				

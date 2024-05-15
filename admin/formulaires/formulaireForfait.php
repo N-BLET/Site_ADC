@@ -10,7 +10,7 @@ if (isset($_GET["id"])) {
 	$id = protectionDonneesFormulaire($_GET["id"]);
 	$forfait = ForfaitRepo::getForfait($id);
 	if ($forfait == null)
-		header("location: ".RACINE_SITE."/admin/index.php?forfaitInconnu");
+		header("location: /admin/index.php?forfaitInconnu");
 }
 
 if (isset($_POST["btnEnregistrer"])) {
@@ -22,8 +22,10 @@ if (isset($_POST["btnEnregistrer"])) {
 
 		if ($id > 0) {
 			$forfait = ForfaitRepo::getForfait($id);
-			if ($forfait == null)
-				header("location: ".RACINE_SITE."/admin/index.php?forfaitInconnu");
+			if ($forfait == null){
+				header("location: /admin/index.php?forfaitInconnu");
+				exit;
+			}
 		}
 
 		$forfait->setDuree($duree);
@@ -32,19 +34,25 @@ if (isset($_POST["btnEnregistrer"])) {
 		if ($id == 0) {
 			if (!ForfaitRepo::insert($forfait)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+				echo $message;
 			}else {
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Votre nouveau forfait a bien été enregistré !</strong><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireForfait.php?id=" . $forfait->GetIdForfait());
+				header("location: /admin/tableaux/tabForfaits.php?Validation1");
+				exit;
 			}  
 		} else {
-			if (!ForfaitRepo::update($forfait))
+			if (!ForfaitRepo::update($forfait)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\"><strong>Votre forfait a bien été modifié !</strong><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireForfait.php?idForfait=" . $forfait->GetIdForfait());
+				echo $message;
+			}
+			else{
+				header("location: /admin/tableaux/tabForfaits.php?Validation2");
+				exit;
+			}
 		}
-	} else
+	} else{
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+		echo $message;
+	}
 }
 
 ?>
@@ -74,7 +82,8 @@ if (isset($_POST["btnEnregistrer"])) {
 			</div>
 			<div class="form-group" >
 				<div class="text-center">
-					<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">
+					<a class="btn btn-dark col-md-1 mx-1" href='./../tableaux/tabInstruments.php'>Retour</a>
+					<input type="submit" class="btn btn-success" name="btnEnregistrer" value="Enregistrer">
 				</div>
 			</div>
 		</form>

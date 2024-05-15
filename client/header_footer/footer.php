@@ -4,7 +4,7 @@
         <h4>Atelier des clarinettes</h4>
         <p>Le Bourg<br>42460 JARNOSSE</br></p>
         <p>Tél : 06.12.41.63.47</p>
-        <p><a href="<?php echo RACINE_SITE; ?>/client/accueil.php">Retour accueil</a> | <a href="<?php echo RACINE_SITE; ?>/connexion/logout.php">Déconnexion</a></p>
+        <p><a href="/client/accueil.php">Retour accueil</a> | <a href="/connexion/logout.php">Déconnexion</a></p>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 my-3 my-lg-0">

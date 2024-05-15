@@ -7,16 +7,16 @@ class Instrument_LocationRepo
 	{
 		$BD = connexionBD();
 
-		$SQL = "SELECT idInstruLoc, typeInstruLoc, marqueInstruLoc, modeleInstruLoc, numeroSerieInstruLoc, dateAchatInstruLoc " .
-				"FROM `INSTRUMENT_LOCATION` " .
-				"WHERE `INSTRUMENT_LOCATION`.idInstruLoc = :id;";
+		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+				"FROM `INSTRUMENT` " .
+				"WHERE `INSTRUMENT`.idInstrument = :id;";
 
 		$instruLoc  = null;
 
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute(array(':id' => $idInstruLoc))) {
 				if ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
-					$instruLoc = new Instrument_Location($resultat["idInstruLoc"],  $resultat["typeInstruLoc"], $resultat["marqueInstruLoc"], $resultat["modeleInstruLoc"], $resultat["numeroSerieInstruLoc"], $resultat["dateAchatInstruLoc"]);
+					$instruLoc = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
 				}
 			} else
 				afficherErreurPDO(__FILE__, $requete);
@@ -30,10 +30,9 @@ class Instrument_LocationRepo
 	public static function getInstruments_Location()
 	{
 		$BD = connexionBD();
-
-        $SQL = "SELECT idInstruLoc, typeInstruLoc, marqueInstruLoc, modeleInstruLoc, numeroSerieInstruLoc, dateAchatInstruLoc " .
-        "FROM `INSTRUMENT_LOCATION` ";
-
+        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, statutLocation " .
+        "FROM `INSTRUMENT` ";
+		
 		if (!empty($_GET["s"])) {
 			$lettres = protectionDonneesFormulaire($_GET["s"]);
 			$SQL .= "WHERE typeInstruLoc LIKE \"%".$lettres."%\";";
@@ -46,34 +45,38 @@ class Instrument_LocationRepo
 		}
 		
 		$instruLocs  = array();
-
+		
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute()) {
 				while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
-					$instruLoc = new Instrument_Location($resultat["idInstruLoc"],  $resultat["typeInstruLoc"], $resultat["marqueInstruLoc"], $resultat["modeleInstruLoc"], $resultat["numeroSerieInstruLoc"], $resultat["dateAchatInstruLoc"]);
+					$instruLoc = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
 					array_push($instruLocs, $instruLoc);
 				}
-			} else
+			} else {
 				afficherErreurPDO(__FILE__, $requete);
+			}
 		}
 
 		return $instruLocs;
 	}
 
-    public static function insert(Instrument_Location $instruLoc)
+    public static function insert(Instrument $instruLoc)
 	{
 		$BD = connexionBD();
 
 		$data = [
-			'idInstruLoc' => $instruLoc->getIdInstrument(),
-			'typeInstruLoc' => ucwords($instruLoc->getTypeInstrument()),
-			'marqueInstruLoc' => strtoupper ($instruLoc->getMarque()),
-			'modeleInstruLoc' => ucfirst(strtolower($instruLoc->getModele())),
-            'numeroSerieInstruLoc' => $instruLoc->getNumeroSerie(),
-            'dateAchatInstruLoc' => $instruLoc->getDateAchatISO()
+			'idInstrument' => $instruLoc->getIdInstrument(),
+			'typeInstrument' => ucwords($instruLoc->getTypeInstrument()),
+			'marque' => strtoupper ($instruLoc->getMarque()),
+			'modele' => ucfirst(strtolower($instruLoc->getModele())),
+            'numeroSerie' => $instruLoc->getNumeroSerie(),
+            'dateAchat' => $instruLoc->getDateAchatISO(),
+			'parcLocation' => $instruLoc->isParcLocation(),
+			'fkIdClient' => $instruLoc->getClient()->getIdClient(),
+			'fkIdLocation' => $instruLoc->getLocation()->getIdLocation()
 		];
 
-		$SQL = "INSERT INTO `INSTRUMENT_LOCATION` (`idInstruLoc`, `typeInstruLoc`, `marqueInstruLoc`, `modeleInstruLoc`, `numeroSerieInstruLoc`, `dateAchatInstruLoc`) VALUES (:idInstruLoc, :typeInstruLoc, :marqueInstruLoc, :modeleInstruLoc, :numeroSerieInstruLoc, :dateAchatInstruLoc);";
+		$SQL = "INSERT INTO `INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`, `fkIdLocation`) VALUES (:idInstrument, :typeInstrument, :marque, :modele, :numeroSerie, :dateAchat, :parcLocation, :fkIdClient, :fkIdLocation);";
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute($data)) {
 				$instruLoc->setIdInstrument($BD->lastInsertId());
@@ -84,7 +87,7 @@ class Instrument_LocationRepo
 		return false;
 	}
 	
-    public static function update(Instrument_Location $instruLoc)
+    public static function update(Instrument $instruLoc)
 	{
 		$BD = connexionBD();
 
@@ -94,10 +97,11 @@ class Instrument_LocationRepo
 			'marqueInstruLoc' => strtoupper ($instruLoc->getMarque()),
 			'modeleInstruLoc' => ucfirst(strtolower($instruLoc->getModele())),
             'numeroSerieInstruLoc' => $instruLoc->getNumeroSerie(),
-            'dateAchatInstruLoc' => $instruLoc->getDateAchatISO()
+            'dateAchatInstruLoc' => $instruLoc->getDateAchatISO(),
+			'parc'
 		];
 
-		$SQL = "UPDATE `INSTRUMENT_LOCATION` SET idInstruLoc=:idInstruLoc, typeInstruLoc=:typeInstruLoc, marqueInstruLoc=:marqueInstruLoc, modeleInstruLoc=:modeleInstruLoc, numeroSerieInstruLoc=:numeroSerieInstruLoc, dateAchatInstruLoc=:dateAchatInstruLoc WHERE idInstruLoc = :idInstruLoc;";
+		$SQL = "UPDATE `INSTRUMENT` SET idInstrument=:idInstruLoc, typeInstrument=:typeInstruLoc, marque=:marqueInstruLoc, modele=:modeleInstruLoc, numeroSerie=:numeroSerieInstruLoc, dateAchatInstruLoc=:dateAchatInstruLoc WHERE idInstruLoc = :idInstruLoc;";
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute($data)) {
 				return true;
@@ -107,7 +111,7 @@ class Instrument_LocationRepo
 		return false;
 	}
 
-    public static function delete(Instrument_Location $instruLoc)
+    public static function delete(Instrument $instruLoc)
 	{
 		$BD = connexionBD();
 
@@ -115,7 +119,7 @@ class Instrument_LocationRepo
 			'idInstruLoc' => $instruLoc->getIdInstrument()
 		];
 
-		$SQL = "DELETE FROM `INSTRUMENT_LOCATION` WHERE idInstruLoc = :idInstruLoc;";
+		$SQL = "DELETE FROM `INSTRUMENT` WHERE idInstrument = :idInstruLoc;";
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute($data)) {
 				return true;

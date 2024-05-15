@@ -1,6 +1,6 @@
 <?php
-require_once("../../connexion/gestionSession.php"); 
-require_once("../header_footer/headerAdmin.php");  
+require_once("./../../includes/page.inc.php");
+require_once("../header_footer/headerAdmin.php");
 
 if (isset($_GET["idSuppression"])) {
 	$idEntretien = protectionDonneesFormulaire($_GET["idSuppression"]);
@@ -8,18 +8,35 @@ if (isset($_GET["idSuppression"])) {
 	$entretienSuppression = EntretienRepo::getEntretien($idEntretien);
 	if ($entretienSuppression != null) {
 		if (!EntretienRepo::delete($entretienSuppression))
-			header("location: ".RACINE_SITE."/admin/tableaux/entretiens.php?erreurSuppression");
+			header("location: /admin/tableaux/entretiens.php?erreurSuppression");
 	}
 }
 
 $lesEntretiens = EntretienRepo::getEntretiens();
+$message = "";
+
+if (isset($_GET["idSuppression"])){
+    $message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">L'entretien a bien été supprimé !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+    echo $message;
+}
+
+if (isset($_GET["Validation1"])){
+    $message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre entretien a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+    echo $message;
+}
+
+if (isset($_GET["Validation2"])){
+    $message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre entretien a bien été modifié !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+    echo $message;
+}
+
 ?>
 <section class="page-section" id="entretiens">	
 	<div class="container">
 		
 		<h2>Gestion des entretiens</h2>
 
-		<p><a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/admin/formulaires/formulaireEntretien.php'>Ajouter</a></p>
+		<p><a class="btn btn-success" href='/admin/formulaires/formulaireEntretien.php'>Ajouter</a></p>
 
 		<form action="entretiens.php" method="get" id="rechercheInstru">
 			<div class="row">
@@ -27,7 +44,7 @@ $lesEntretiens = EntretienRepo::getEntretiens();
 					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-primary mb-4" name="btnRechercherInstru" value="Rechercher">
+					<input type="submit" class="btn btn-info mb-4" name="btnRechercherInstru" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -38,7 +55,7 @@ $lesEntretiens = EntretienRepo::getEntretiens();
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-primary mb-4" name="btnRechercherClient" value="Rechercher">
+					<input type="submit" class="btn btn-info mb-4" name="btnRechercherClient" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -54,8 +71,7 @@ $lesEntretiens = EntretienRepo::getEntretiens();
 					<th>DATE ENTRETIEN</th>
 					<th>DESCRITPION ENTRETIEN</th>
 					<th>MONTANT TTC</th>
-					<th></th>
-					<th></th>
+					<th colspan="2">ACTIONS</th>
 				</tr>
 				
 				<?php
@@ -63,16 +79,16 @@ $lesEntretiens = EntretienRepo::getEntretiens();
 					$tr = '';
 					foreach ($lesEntretiens as $entretien) {
 						$tr .= "<tr>";
-						$tr .= "<td>" . $entretien->getInstrument()->getClient()->getNom() . " " . $entretien->getInstrument()->getClient()->getPrenom() . "</td>";
+						$tr .= "<td>" . $entretien->getClient()->getNom() . " " . $entretien->getClient()->getPrenom() . "</td>";
 						$tr .= "<td>" . $entretien->getInstrument()->GetTypeInstrument() . "</td>";
 						$tr .= "<td>" . $entretien->getInstrument()->GetMarque() . "</td>";
 						$tr .= "<td>" . $entretien->getInstrument()->GetModele() . "</td>";
 						$tr .= "<td>" . $entretien->getInstrument()->GetNumeroSerie() . "</td>";
-						$tr .= "<td>" . $entretien->getDateEntretienStr() . "</td>";
+						$tr .= "<td>" . $entretien->getDateEntretienTab() . "</td>";
 						$tr .= "<td>" . $entretien->GetDescriptionEntretien() . "</td>";
 						$tr .= "<td>" . prix($entretien->GetPrixEntretien()) . "</td>";
-						$tr .= "<td><a href=" . RACINE_SITE . "/admin/formulaires/formulaireEntretien.php?id=" . $entretien->GetIdEntretien() . "'>Modifier</a></td>";
-						$tr .= "<td><a href=" . RACINE_SITE . "/admin/tableaux/entretiens.php?idSuppression=" . $entretien->GetIdEntretien() . "'>Supprimer</a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireEntretien.php?id=" . $entretien->GetIdEntretien() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/tableaux/tabEntretiens.php?idSuppression=" . $entretien->GetIdEntretien() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}
 					echo $tr;

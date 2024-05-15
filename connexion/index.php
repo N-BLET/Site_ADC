@@ -62,12 +62,12 @@ if (isset($_GET["validationNOK"]))
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link text-ligth" href="<?php echo RACINE_SITE; ?>/index.php#services">Services</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#entretien">Entretien</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#location">Location</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#portfolio">Vente</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#equipe">L'équipe</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="<?php echo RACINE_SITE; ?>/index.php#contact">Contact</a></li>
+					<li class="nav-item"><a class="nav-link text-ligth" href="/index.php#services">Services</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#entretien">Entretien</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#location">Location</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#portfolio">Vente</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#equipe">L'équipe</a></li>
+					<li class="nav-item"><a class="nav-link text-light" href="/index.php#contact">Contact</a></li>
 				</ul>
 				<a class="btn btn-primary btn-social mx-2" href="https://www.facebook.com/latelierdesclarinettes"><i class="fab fa-facebook-f"></i></a>
 			</div>
@@ -89,7 +89,7 @@ if (isset($_GET["validationNOK"]))
 			}
 			?>
 
-			<form action="login.php" method="post">
+			<form action="./login.php" method="post">
 				<div class="form-group">
 					<label for="email">Email : </label>
 					<input type="mail" class="form-control" id="email" name="email" value="" required/>
@@ -104,7 +104,7 @@ if (isset($_GET["validationNOK"]))
 				</div>
 			</form>
 			<div class="text-center">
-				<a href="<?php echo RACINE_SITE; ?>/connexion/inscription.php">Inscription</a>
+				<a href="./inscription.php">Inscription</a>
 			</div>
 		</div>
 	</div>
@@ -114,7 +114,7 @@ if (isset($_GET["validationNOK"]))
 			<h4>Atelier des clarinettes</h4>
 			<p>Le Bourg<br>42460 JARNOSSE</br></p>
 			<p>Tél : 06.12.41.63.47</p>
-			<p><a href="<?php echo RACINE_SITE; ?>/index.php">Retour sur le site</a></p>
+			<p><a href="./../index.php">Retour sur le site</a></p>
 			<div class="container">
 				<div class="row align-items-center">
 					<div class="col-lg-12 my-3 my-lg-0">

@@ -4,7 +4,7 @@ require_once("../header_footer/headerAdmin.php");
 
 // Gestion des variables de la page
 $location = new Location(0, date('Y-m-d'), date('Y-m-d'), 0, 0, 0);
-$lesInstruments = Instrument_LocationRepo::getInstruments_Location();
+$lesInstruments = InstrumentRepo::getInstrumentsLocation();
 $lesForfaits = ForfaitRepo::getForfaits();
 $lesClients = ClientRepo::getClients();
 $message = "";
@@ -13,7 +13,7 @@ if (isset($_GET["id"])) {
 	$id = protectionDonneesFormulaire($_GET["id"]);
 	$location = LocationRepo::getLocation($id);
 	if ($location == null)
-		header("location: ".RACINE_SITE."/admin/index.php?locationInconnue");
+		header("location: /admin/index.php?locationInconnue");
 
 }
 
@@ -30,7 +30,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		if ($id > 0) {
 			$location = LocationRepo::getLocation($id);
 			if ($location == null)
-				header("location: ".RACINE_SITE."/admin/index.php?locationInconnue");
+				header("location: /admin/index.php?locationInconnue");
 		}
 
 		$date1 = date($dateLocation);
@@ -39,27 +39,31 @@ if (isset($_POST["btnEnregistrer"])) {
 		$date2 = date($finLocation);
         $location->setFinLocation($date2);
 
-		$location->setFkIdInstruLoc($fkIdInstruLoc);
+		$location->setFkIdInstrument($fkIdInstruLoc);
 		$location->setFkIdForfait($fkIdForfait);
 		$location->setFkIdClient($fkIdClient);
 
 
 
 		if ($id == 0) {
-			if (!LocationRepo::insert($location))
+			if (!LocationRepo::insert($location)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouveau contrat de loaction a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireLocation.php?idLocation=" . $location->GetIdLocation());
+			}else{
+				header("location: /admin/tableaux/tabLocations.php?Validation1");
+				exit;
+			}
 		} else {
-			if (!LocationRepo::update($location))
+			if (!LocationRepo::update($location)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de votre contrat de location ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireLocation.php?idLocation=" . $location->GetIdLocation());
+			}else{
+				header("location: /admin/tableaux/tabLocations.php?Validation2");
+				exit;
+			}
 		}
-	} else
+	} else{
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+		echo $message;
+	}
 }
 
 ?>
@@ -79,26 +83,34 @@ if (isset($_POST["btnEnregistrer"])) {
 
 			<div class="form-group">
 				<label for="dateLocation">DATE DE DÉBUT DE LOCATION :</label>
-				<input type="date" class="form-control" id="dateLocation" name="dateLocation" value="<?php echo $location->getDateLocation() ?>">
+				<input type="date" class="form-control" id="dateLocation" name="dateLocation" value="<?php echo $location->getDateLocationForm() ?>">
 			</div>
 			<div class="form-group">
 				<label for="finLocation">DATE DE FIN DE LOCATION :</label>
-				<input type="date" class="form-control" id="finLocation" name="finLocation" value="<?php echo $location->getFinLocation() ?>">
+				<input type="date" class="form-control" id="finLocation" name="finLocation" value="<?php echo $location->getFinLocationForm() ?>">
 			</div>
 			<div class="form-group">
 			<label for="fkIdInstruLoc">INSTRUMENT LOUÉ :</label>
 				<select class="form-select" id="fkIdInstruLoc" name="fkIdInstruLoc" class="form-control">
 					<option value="0">Sélectionnez le numéro de série de votre instrument</option>
 					<?php
-					$option = "";
+					$optionSelection = ""; // Initialisez la variable pour l'option sélectionnée
+					$optionListe = ""; // Initialisez la variable pour la liste des options sélectionnées
+
 					foreach ($lesInstruments as $instrument) {
-						$option .=  "<option value=\"" . $instrument->getIdInstrument() . "\"";
-							if($location->getIdLocation()>0 && $location->getInstrument_Location()->getIdInstrument() == $instrument->getIdInstrument()){
-								$option .= "selected";
-							}
-							$option .= 	">" . $instrument->getNumeroSerie() . "</option>";	
+						$optionListe .= "<option value=\"" . $instrument->getIdInstrument() . "\"";
+						if($location->getIdLocation() > 0 && $location->getFkIdInstrument() == $instrument->getIdInstrument()) {
+							$optionSelection = "<option value=\"" . $instrument->getIdInstrument() . "\"";
+							$optionSelection  .= " selected>"; // Ajoutez l'attribut "selected" si l'instrument correspond à celui sélectionné pour l'entretien
+							$optionSelection  .= $instrument->getTypeInstrument() . " | n° : " . $instrument->getNumeroSerie() . "</option>"; // Ajoutez le contenu de l'option sélectionnée
+							break;
+						} else {	
+							$optionListe .= ">" . $instrument->getTypeInstrument() . " | n° : " . $instrument->getNumeroSerie() . "</option>"; // Ajoutez le contenu de toutes les options non sélectionnées
+						}
 					}
-					echo $option;		
+							
+					// Affichez l'option sélectionnée s'il y en a une, sinon affichez toutes les options non sélectionnées
+					echo $optionSelection !== "" ? $optionSelection : $optionListe;		
 					?>
 				</select>
 			</div>
@@ -107,15 +119,15 @@ if (isset($_POST["btnEnregistrer"])) {
 				<select class="form-select" id="fkIdForfait" name="fkIdForfait" class="form-control">
 					<option value="0">Sélectionnez le forfait</option>
 					<?php
-					$option = "";
+					$option2 = "";
 					foreach ($lesForfaits as $forfait) {
-						$option .= "<option value= \"" . $forfait->getIdForfait() . "\"";
-						if($location->getIdLocation()>0 && $location->getForfait()->getIdForfait() == $forfait->getIdForfait()) {
-							$option .= "selected";
+						$option2 .= "<option value= \"" . $forfait->getIdForfait() . "\"";
+						if($location->getIdLocation() > 0 && $location->getForfait()->getIdForfait() == $forfait->getIdForfait()) {
+							$option2 .= "selected";
 						} 
-						$option .= ">" . $forfait->getDuree() . "</option>";
+						$option2 .= ">" . $forfait->getDuree() . "</option>";
 					}
-					echo $option;
+					echo $option2;
 					?>
 				</select>
 			</div>
@@ -124,20 +136,21 @@ if (isset($_POST["btnEnregistrer"])) {
 				<select id="fkIdClient" name="fkIdClient" class="form-control">
 					<option value="0">Sélectionnez le client</option>
 					<?php
-					$option .= "";
+					$option3 .= "";
 					foreach ($lesClients as $client) {
-						$option .= "<option value=\"" . $client->getIdClient() . "\"";
+						$option3 .= "<option value=\"" . $client->getIdClient() . "\"";
 						if($location->getIdLocation()>0 && $location->getClient()->getIdClient() == $client->getIdClient()){
-							$option .= "selected";
+							$option3 .= "selected";
 						}
-						$option .= ">" . $client->getNom() . " " . $client->getPrenom() . "</option>";
+						$option3 .= ">" . $client->getNom() . " " . $client->getPrenom() . "</option>";
 					}
-					echo $option;	
+					echo $option3;	
 					?>
 				</select>
 			</div>
 			<div class="text-center">
-				<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">
+				<a class="btn btn-dark col-md-1 mx-1" href='./../tableaux/tabLocations.php'>Retour</a>
+				<input type="submit" class="btn btn-success" name="btnEnregistrer" value="Enregistrer">
 			</div>
 		</form>
 	</div>

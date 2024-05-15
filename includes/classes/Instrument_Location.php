@@ -8,10 +8,12 @@ class Instrument_Location
 	private $modeleInstruLoc;
     private $numeroSerieInstruLoc;
 	private $dateAchatInstruLoc;
-	private $location;
+	private $statutLocation;
+	// private $location;
+	// private $status;
 
 	/* Constructeur */
-	public function __construct(int $idInstruLoc, string $typeInstruLoc, string $marqueInstruLoc, string $modeleInstruLoc, string $numeroSerieInstruLoc, string $dateAchatInstruLoc)
+	public function __construct(int $idInstruLoc, string $typeInstruLoc, string $marqueInstruLoc, string $modeleInstruLoc, string $numeroSerieInstruLoc, string $dateAchatInstruLoc, bool $statutLocation)
 	{
 		$this->idInstruLoc = $idInstruLoc;
         $this->typeInstruLoc = $typeInstruLoc;
@@ -19,7 +21,7 @@ class Instrument_Location
 		$this->modeleInstruLoc = $modeleInstruLoc;
         $this->numeroSerieInstruLoc = $numeroSerieInstruLoc;
 		$this->dateAchatInstruLoc = strtotime($dateAchatInstruLoc);
-		$this->location = LocationRepo::getLocation($idInstruLoc);
+		$this->statutLocation = $statutLocation;
 	}
 
 	/* Getters/Setters */
@@ -30,7 +32,7 @@ class Instrument_Location
 
 	public function setIdInstrument(int $idInstruLoc)
 	{
-		$this->idInstruInstruLoc = $idInstruLoc;
+		$this->idInstruLoc = $idInstruLoc;
 	}
 
     public function getTypeInstrument(): string
@@ -73,44 +75,29 @@ class Instrument_Location
 		$this->numeroSerieInstruLoc = $numeroSerieInstruLoc;
 	}
 
-    public function getDateAchat(): int
+    public function getDateAchatTab(): string
 	{
-		return $this->dateAchatInstruLoc;
+		return date("d/m/Y",$this->dateAchatInstruLoc);
 	}
 
-	public function getDateAchatStr(): string
-	{
-		return date("d/m/Y", $this->dateAchatInstruLoc);
-	}
-
-    public function getDateAchatISO(): string
+	public function getDateAchatForm(): string
 	{
 		return date("Y-m-d", $this->dateAchatInstruLoc);
 	}
 
 	public function setDateAchat(string $dateAchatInstruLoc)
 	{
-		$this->dateAchatInstruLoc = strtotime($dateAchatInstruLoc);
+		$this->dateAchatInstruLoc = $dateAchatInstruLoc;
 	}
 
-	public function getLocation(): location
+	public function isStatutLocation(): string
 	{
-		return $this->location;
+		return ($this->statutLocation) ? "oui" : "non";
 	}
 
-	public function setLocation(location $newLocation)
+	public function setStatutLocation(bool $isRent)
 	{
-		$this->location = $newLocation;
-	}
-
-	public function getStatus(): string
-	{
-		if($this->location) {
-			$this->status = 'Oui';
-		}else {
-			$this->status = 'Non';
-		}
-		return $this->status;
+		$this->statutLocation = $isRent;
 	}
 
 

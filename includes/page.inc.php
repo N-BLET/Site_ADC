@@ -1,10 +1,9 @@
 <?php
 // Racine du site
-define("RACINE_SITE", "/NFA021_ADC");
+define("pathGetSession", "/NFA021-ADC");
 
 // PHP Mailer
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 require __DIR__ . '/PHPMailer/src/Exception.php';
 require __DIR__ . '/PHPMailer/src/PHPMailer.php';

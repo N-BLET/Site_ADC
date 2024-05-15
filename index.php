@@ -52,7 +52,7 @@
                 <div class="masthead-subheading">Bienvenue dans notre atelier !</div>
                 <div class="masthead-heading text-uppercase">Notre talent, la musique</div>
                 <div style="height: 70px;"></div>
-                <a class="btn btn-primary btn-xl text-uppercase" href="/NFA021_ADC/connexion/index.php">Connectez-vous</a>
+                <a class="btn btn-primary btn-xl text-uppercase" href="./connexion/index.php">Connectez-vous</a>
             </div>
         </header>
         <!-- Services-->

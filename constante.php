@@ -1,4 +1,2 @@
 <?php
-echo 'TOTO';
-define ("pathGetSession", "C:/Program Files/UwAmp/www/NFA021_ADC");
-?>
+define ("pathGetSession", "C:/wamp64/www/NFA021-ADC");

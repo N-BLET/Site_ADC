@@ -1,16 +1,18 @@
 <?php
-require_once("../../includes/page.inc.php");
+require_once("./../../connexion/gestionSession.php");
 require_once("../header_footer/header.php");
 
 // Gestion des variables de la page
 $message = "";
+$client = $_SESSION["Client"];
+$idClient = $client->getIdClient();
 $lesVilles=VilleRepo::getVilles();
 
 if (isset($_SESSION["Client"])) {
 	
 	$client = $_SESSION["Client"];
 	if ($client == null)
-		header("location: ".RACINE_SITE."/client/index.php?clientInconnu");
+		header("location: /client/index.php?clientInconnu");
 }
 
 if (isset($_POST["btnEnregistrer"])) {
@@ -28,7 +30,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		if ($id > 0) {
 			$client = ClientRepo::getClient($id);
 			if ($client == null)
-				header("location: ".RACINE_SITE."/client/index.php?clientInconnu");
+				header("location: /client/index.php?clientInconnu");
 			} else {
 				$client->setJetonValidation(uniqid());
 			}
@@ -52,12 +54,12 @@ if (isset($_POST["btnEnregistrer"])) {
 			if (!ClientRepo::insert($client))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				header("location: ".RACINE_SITE."/client/tableaux/formulaireInfosClient.php?id=" . $client->getIdClient()); 
+				header("location: /client/tableaux/formulaireInfosClient.php?id=" . $client->getIdClient()); 
 		} else {
 			if (!ClientRepo::update($client))
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else
-				header("location: ".RACINE_SITE."/client/tableaux/formulaireInfosClient.php?id=" . $client->getIdClient());
+				header("location: /client/tableaux/formulaireInfosClient.php?id=" . $client->getIdClient());
 		}
 	} else
 		$message = "<div class=\"alert alert-warning\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
@@ -77,7 +79,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		?>
 
 		<form action="formulaireInfosClient.php" method="post">
-			<input type="hidden" id="id" name="id" value="<?php echo $client->getIdClient() ?>" />
+			<input type="hidden" id="id" name="id" value="<?php echo $idClient ?>" />
 
 			<div class="form-group">
 				<label for="nom">NOM :</label>
@@ -131,7 +133,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			</div>
             <div class="row g-2">
                 <div class="col-md-6 text-end">
-				    <a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/infosClient.php'>Annuler</a>
+				    <a class="btn btn-primary" href='/client/tableaux/infosClient.php'>Annuler</a>
 				</div>
 				<div class="col-md-6 text-start">
 					<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">

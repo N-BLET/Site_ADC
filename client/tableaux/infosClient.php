@@ -1,8 +1,6 @@
 <?php
-
-require("./../../constante.php");
-require_once(pathGetSession . "/connexion/gestionSession.php");
-require_once(pathGetSession . "/client/header_footer/header.php");
+require_once("./../../connexion/gestionSession.php");
+require_once("../header_footer/header.php");
 
 // Gestion des variables de la page
 $client = $_SESSION["Client"];
@@ -56,8 +54,9 @@ $message = "";
 			</div>
 			<div class="container">
 				<div class="row g-2">
-					<a class="btn btn-primary col-md-2 mx-2" href='<?php echo RACINE_SITE; ?>/client/accueil.php'>Retour</a>
-					<a class="btn btn-primary col-md-2 mr-2" href='<?php echo RACINE_SITE; ?>/client/tableaux/formulaireInfosClient.php'>Modifier</a>
+					<a class="btn btn-primary col-md-2 mx-2" href='/client/accueil.php'>Retour</a>
+					<a class="btn btn-primary col-md-2 mr-2" href='/client/tableaux/formulaireInfosClient.php?id= <?php echo $client->GetIdClient() ?>'>Modifier</a>
+					
 				</div>
 			</div>
 		</div>

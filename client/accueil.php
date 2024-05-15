@@ -1,4 +1,5 @@
 <?php
+require_once("../includes/page.inc.php");
 require_once("../connexion/gestionSession.php");
 require_once("./header_footer/header.php");
 ?>

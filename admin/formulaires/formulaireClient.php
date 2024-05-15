@@ -11,7 +11,7 @@ if (isset($_GET["id"])) {
 	$id = protectionDonneesFormulaire($_GET["id"]);
 	$client = ClientRepo::getClient($id);
 	if ($client == null)
-		header("location: ".RACINE_SITE."/admin/index.php?clientInconnu");
+		header("location: /admin/index.php?clientInconnu");
 }
 
 if (isset($_POST["btnEnregistrer"])) {
@@ -28,16 +28,17 @@ if (isset($_POST["btnEnregistrer"])) {
 
 		if ($id > 0) {
 			$client = ClientRepo::getClient($id);
-			if ($client == null)
-				header("location: ".RACINE_SITE."/admin/index.php?clientInconnu");
+			if ($client == null){
+				header("location: /admin/index.php?clientInconnu");
+				exit;
 			} else {
 				$client->setJetonValidation(uniqid());
 			}
-
+		}
 		$client->setNom($nom);
 		$client->setPrenom($prenom);
-        $client->setAdresse($adresse);
-        $client->setTelephone($telephone);
+		$client->setAdresse($adresse);
+		$client->setTelephone($telephone);
 		$client->setEmail($email);
 		$client->setFkIdVille($fkIdVille);
 
@@ -66,22 +67,29 @@ if (isset($_POST["btnEnregistrer"])) {
 		}
 
 		if ($id == 0) {
-			if (!ClientRepo::insert($client))
+			if (!ClientRepo::insert($client)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouveau client a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireClient.php?id=" . $client->getIdClient()); 
+				echo $message;
+			}
+			else{
+				header("location: /admin/tableaux/tabClients.php?validation1");
+				exit;
+			}
 		} else {
-			if (!ClientRepo::update($client))
+			if (!ClientRepo::update($client)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de votre client ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireClient.php?id=" . $client->getIdClient());
+				echo $message;
+			}
+			else {
+				header("location: /admin/tableaux/tabClients.php?validation2");
+				exit;
+			}
 		}
-	} else
+	} else{
 		$message = "<div class=\"alert alert-warning  alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+		echo $message;
+	}
 }
-
 ?>
 
 <section class="page-section" id="formulaireClient">
@@ -95,7 +103,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		}
 		?>
 
-		<form action="<?php echo RACINE_SITE; ?>/admin/formulaires/formulaireClient.php" method="post">
+		<form action="/admin/formulaires/formulaireClient.php" method="post">
 			<input type="hidden" id="id" name="id" value="<?php echo $client->getIdClient() ?>" />
 
 			<div class="form-group">
@@ -162,7 +170,8 @@ if (isset($_POST["btnEnregistrer"])) {
 			</div>
 			<div class="row g-2">
 				<div class="text-center">
-					<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">
+					<a class="btn btn-dark col-md-1 mx-1" href='./../tableaux/tabInstruments.php'>Retour</a>
+					<input type="submit" class="btn btn-success" name="btnEnregistrer" value="Enregistrer">
 				</div>
 			</div>
 		</form>

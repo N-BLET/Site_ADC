@@ -1,5 +1,5 @@
 <?php
-require_once("../../gestionSession.php");
+require_once("./../../connexion/gestionSession.php");
 require_once("../header_footer/header.php");
 
 // Gestion des variables de la page
@@ -23,7 +23,7 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
                                 $data = "<div class=\"col\">
                                         <div class=\"card-body border border-dark rounded my-3\">
                                             <div class=\"row\">
-                                                <h5 class=\"text-danger mb-3\">Instrument : " . $instrument->GetTypeInstrument() . " | " .  $instrument->GetModele() . " | " . $instrument->GetNumeroSerie() . "</h5>";
+                                                <h5 class=\"text-danger mb-3\">Instrument : " . $instrument->GetTypeInstrument() . " | " .  $instrument->GetModele() . " | N° : " . $instrument->GetNumeroSerie() . "</h5>";
                         $data .= "<div class=\"row\">
                                     <div class=\"col-md-3\">
                                         <h6>DATE DE L'ENTRETIEN :</h6>
@@ -66,7 +66,7 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
         }
 		?>
 		<div class="text-center mb-3">
-			<a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/connexion/accueil.php'>Retour</a>
+			<a class="btn btn-primary" href='/client/accueil.php'>Retour</a>
 		</div>
 	</div>
 </section>

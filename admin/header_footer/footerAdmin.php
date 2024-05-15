@@ -2,8 +2,8 @@
 <footer class="footer">
     <div class="container-fluid card-footer">
         <h4>Atelier des clarinettes</h4>
-        <p>Le Bourg<br>42460 JARNOSSE</br></p>
-        <p><a href="<?php echo RACINE_SITE; ?>/index.php">Retour au site</a> | <a href="<?php echo RACINE_SITE; ?>/connexion/logout.php">Déconnexion</a></p>
+        <p>Rue Sainte Cécile<br>69000 LYON</br></p>
+        <p><a href="./../../index.php">Retour au site</a> | <a href="./../../connexion/logout.php">Déconnexion</a></p>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 my-3 my-lg-0">
@@ -21,6 +21,8 @@
         </div>     
     </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- Core theme JS-->
-<script src="<?php echo RACINE_SITE; ?>/js/scripts.js"></script>
+<script src="./../../js/scripts.js"></script>
+<!-- Datatables  -->
+<!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/r-2.2.9/datatables.min.js"></script>-->

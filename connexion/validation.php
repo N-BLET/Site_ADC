@@ -13,9 +13,9 @@ if (isset($_GET["jeton"])) {
 			$client->setEstValide(true);
 			
 			ClientRepo::update($client);
-			header("location: ".RACINE_SITE."/connexion/index.php?validationOK");
+			header("location: /connexion/index.php?validationOK");
 		} else
-			header("location: ".RACINE_SITE."/connexion/index.php?validationDejaOK");
+			header("location: /connexion/index.php?validationDejaOK");
 	} else
-		header("location: ".RACINE_SITE."/connexion/index.php?validationNOK");
+		header("location: /connexion/index.php?validationNOK");
 }

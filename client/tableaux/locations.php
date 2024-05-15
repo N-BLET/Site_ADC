@@ -1,11 +1,17 @@
 <?php
-require_once("../../connexion/gestionSession.php");
+require_once("./../../connexion/gestionSession.php");
 require_once("../header_footer/header.php");
 
 // Gestion des variables de la page
+/*echo "<pre>";
+echo $_SESSION;
+echo "</pre>";*/
+
 $client = $_SESSION["Client"];
 $idClient = $client->getIdClient();
+echo $idClient . " TOTO !!!";
 $lesLocations = LocationRepo::getLocationSelonClient($idClient);
+require_once("../header_footer/header.php");
 ?>
 
 <section class="container">
@@ -68,7 +74,7 @@ $lesLocations = LocationRepo::getLocationSelonClient($idClient);
 			}
 		?>
 		<div class="text-center mb-3">
-			<a class="btn btn-primary" href='<?php echo RACINE_SITE; ?>/client/accueil.php'>Retour</a>
+			<a class="btn btn-primary" href='/client/accueil.php'>Retour</a>
 		</div>
 	</div>
 </div>

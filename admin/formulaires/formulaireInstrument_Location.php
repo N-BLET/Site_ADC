@@ -3,14 +3,14 @@ require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
 
 // Gestion des variables de la page
-$instruLoc = new Instrument_Location(0, "", "", "", "", date('Y-m-d'));
+$instruLoc = new Instrument(0, "", "", "", "", date('Y-m-d'), true, 0, 0);
 $message = "";
 
 if (isset($_GET["id"])) {
 	$id = protectionDonneesFormulaire($_GET["id"]);
-	$instruLoc = Instrument_LocationRepo::getInstrument_Location($id);
+	$instruLoc = InstrumentRepo::getInstrumentLocation($id);
 	if ($instruLoc == null)
-		header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument_Location.php?instrument_LocationInconnu");
+		header("location: /admin/formulaires/formulaireInstrument_Location.php?instrument_LocationInconnu");
 }
 
 if (isset($_POST["btnEnregistrer"])) {
@@ -24,9 +24,9 @@ if (isset($_POST["btnEnregistrer"])) {
         $dateAchatInstruLoc = protectionDonneesFormulaire($_POST["dateAchatInstruLoc"]);
 
 		if ($id > 0) {
-			$instruLoc = Instrument_LocationRepo::getInstrument_Location($id);
+			$instruLoc = InstrumentRepo::getInstrumentLocation($id);
 			if ($instruLoc == null)
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument_Location.php?instrument_LocationInconnu");
+				header("location: /admin/formulaires/formulaireInstrument_Location.php?instrument_LocationInconnu");
 		}
 
 		$instruLoc->setMarque($marqueInstruLoc);
@@ -36,21 +36,28 @@ if (isset($_POST["btnEnregistrer"])) {
         $instruLoc->setDateAchat($dateAchatInstruLoc);
 
 		if ($id == 0) {
-			if (!Instrument_LocationRepo::insert($instruLoc))
+			if (!Instrument_LocationRepo::insert($instruLoc)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre nouvel instrument de location a bien été enregistré !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument_Location.php?id=" . $instruLoc->GetIdInstrument());
+				echo $message;
+			} else{
+				header("location: /admin/tableaux/tabInstrument_Locations.php?Validation1");
+				exit;
+			}
+				
 		} else {
-			if (!Instrument_LocationRepo::update($instruLoc))
+			if (!Instrument_LocationRepo::update($instruLoc)){
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else
-				header("location: ".RACINE_SITE."/admin/formulaires/formulaireInstrument_Location.php?id=" . $instruLoc->GetIdInstrument());
+				echo $message;
+			} else{
+				header("location: /admin/tableaux/tabInstrument_Locations.php?Validation2");
+				exit;
+			}
 		}
-	} else
+	} else {
 		$message = "<div class=\"alert alert-warning  alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button><button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+		echo $message;
+	}
 }
-
 ?>
 
 <section class="page-section" id="formulaireClient">	
@@ -64,7 +71,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		}
 		?>
 
-		<form action="<?php echo RACINE_SITE; ?>/admin/formulaires/formulaireInstrument_Location.php" method="post">
+		<form action="/admin/formulaires/formulaireInstrument_Location.php" method="post">
 			<input type="hidden" id="idInstruLoc" name="idInstruLoc" value="<?php echo $instruLoc->getIdInstrument() ?>" />
 
 			<div class="form-group">
@@ -91,11 +98,31 @@ if (isset($_POST["btnEnregistrer"])) {
 			<div class="form-group mb-4">
 				<label for="dateAchatInstruLoc">DATE D'ACHAT :</label>
 				<input type="date" class="form-control" id="dateAchatInstruLoc" name="dateAchatInstruLoc"
-				value="<?php echo $instruLoc->getDateAchatISO() ?>" required>
+				value="<?php echo $instruLoc->getDateAchatForm() ?>" required>
 			</div>
+			<?php if ($instruLoc->getClient() != null): ?>
+			<div class="form-group mb-4">
+				<label for="fkIdClient">CLIENT :</label>
+				<select id="fkIdClient" name="fkIdClient" class="form-control">
+					<option value="0">Sélectionnez un client</option>
+					<?php
+					$options = "";
+					foreach ($lesClients as $client) {
+						$options .= "<option value=\"" . $client->getIdClient() . "\"";
+						if ($instrument->getIdInstrument() > 0 && $instrument->getClient()->getIdClient() == $client->getIdClient()) {
+							$options .= " selected";
+						}
+						$options .= ">" . $client->getNom() . " " . $client->getPrenom() . "</option>";
+					}
+					echo $options;
+					?>
+				</select>
+			</div>
+			<?php endif; ?>
 			<div class="form-group">
 			<div class="text-center">
-				<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">
+				<a class="btn btn-dark col-md-1 mx-1" href='./../tableaux/tabInstrument_Locations.php'>Retour</a>
+				<input type="submit" class="btn btn-success" name="btnEnregistrer" value="Enregistrer">
 			</div>
 		</form>
 

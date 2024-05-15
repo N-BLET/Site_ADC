@@ -1,5 +1,5 @@
 <?php
-require_once("../../connexion/gestionSession.php");
+require_once("./../../includes/page.inc.php");
 require_once("../header_footer/headerAdmin.php");
 
 if (isset($_GET["idSuppression"])) {
@@ -8,11 +8,29 @@ if (isset($_GET["idSuppression"])) {
 	$villeSuppression = VilleRepo::getVille($idVille);
 	if ($villeSuppression != null) {
 		if (!VilleRepo::delete($villeSuppression))
-			header("location: ".RACINE_SITE."/admin/tableaux/villes.php?erreurSuppression");
+			header("location: /admin/tableaux/villes.php?erreurSuppression");
 	}
 }
 
 $lesVilles = VilleRepo::getVilles();
+$message = "";
+
+if (isset($_GET["idSuppression"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">La ville a bien été supprimée !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
+
+if (isset($_GET["Validation1"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Une ville a bien été rajoutée !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
+
+if (isset($_GET["Validation2"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Les informations de la ville ont bien été modifiées !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
+
+
 ?>
 
 <section class="page-section" id="produits">	
@@ -20,7 +38,7 @@ $lesVilles = VilleRepo::getVilles();
 		
 		<h2>Gestion des villes</h2>
 
-		<p><a class="btn btn-primary mb-4" href='<?php echo RACINE_SITE; ?>/admin/formulaires/formulaireVille.php'>Ajouter</a></p>
+		<p><a class="btn btn-success mb-4" href='/admin/formulaires/formulaireVille.php'>Ajouter</a></p>
 		
 		<form action="villes.php" method="get" id="recherche">
 			<div class="row">
@@ -28,7 +46,7 @@ $lesVilles = VilleRepo::getVilles();
 					<input type="text" class="form-control" name="q" id="q" placeholder="Rechercher par ville" value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-primary mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -40,8 +58,7 @@ $lesVilles = VilleRepo::getVilles();
 					<th>CODE POSTAL</th>
 					<th>DÉPARTEMENT</th>
 					<th>RÉGION</th>
-					<th></th>
-					<th></th>
+					<th colspan="2">ACTIONS</th>
 				</tr>
 
 				<?php
@@ -54,8 +71,8 @@ $lesVilles = VilleRepo::getVilles();
 						$tr .= "<td>" . $ville->GetCp() . "</td>";
 						$tr .= "<td>" . $ville->GetDepartement() . "</td>";
 						$tr .= "<td>" . $ville->GetRegion() . "</td>";
-						$tr .= "<td><a href=" . RACINE_SITE . "/admin/formulaires/formulaireVille.php?id=" . $ville->GetIdVille() . "'>Modifier</a></td>";
-						$tr .= "<td><a href=" . RACINE_SITE . "/admin/tableaux/villes.php?idSuppression=" . $ville->GetIdVille() . "'>Supprimer</a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireVille.php?id=" . $ville->GetIdVille() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/tableaux/tabVilles.php?idSuppression=" . $ville->GetIdVille() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}
 					echo $tr;
