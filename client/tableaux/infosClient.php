@@ -54,7 +54,7 @@ $message = "";
 			</div>
 			<div class="container">
 				<div class="row g-2">
-					<a class="btn btn-primary col-md-2 mx-2" href='/client/accueil.php'>Retour</a>
+					<a class="btn btn-dark col-md-2 mx-2" href='/client/accueil.php'>Retour</a>
 					<a class="btn btn-primary col-md-2 mr-2" href='/client/tableaux/formulaireInfosClient.php?id= <?php echo $client->GetIdClient() ?>'>Modifier</a>
 					
 				</div>

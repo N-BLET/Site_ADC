@@ -3,6 +3,7 @@
     <div class="container-fluid card-footer">
         <h4>Atelier des clarinettes</h4>
         <p>Rue Sainte Cécile<br>69000 LYON</br></p>
+        <p>Tél : 06.12.34.56.78</p>
         <p><a href="./../../index.php">Retour au site</a> | <a href="./../../connexion/logout.php">Déconnexion</a></p>
         <div class="container">
             <div class="row align-items-center">
@@ -21,8 +22,7 @@
         </div>     
     </div>
 </footer>
-
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
-<script src="./../../js/scripts.js"></script>
-<!-- Datatables  -->
-<!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/r-2.2.9/datatables.min.js"></script>-->
+<script src="../../js/scripts.js"></script>

@@ -55,7 +55,7 @@ $lesInstruments = InstrumentRepo::getInstruSelonClient($idClient);
 								<h6>DATE D'ACHAT :</h6>
 							</div>
 							<div class=\"col-md-10\">
-								<p>" . $instrument->getDateAchatStr() . "</p>
+								<p>" . $instrument->getDateAchatTab() . "</p>
 							</div>
 						</div>
 					</div>";
@@ -67,7 +67,7 @@ $lesInstruments = InstrumentRepo::getInstruSelonClient($idClient);
 		}
 	?>
 	<div class="text-center">
-		<a class="btn btn-primary" href='/client/accueil.php'>Retour</a>
+		<a class="btn btn-dark" href='/client/accueil.php'>Retour</a>
 	</div>
 	</div>
 </section>

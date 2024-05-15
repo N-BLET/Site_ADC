@@ -98,12 +98,7 @@ if (isset($_GET["validation2"])){
 		</div>
 	</div>
 </section>
-<!--<script type="text/javascript">
-	$(document).ready(function() {
-		$('#clients').DataTable();
-	} );
 
-</script>-->
 <?php
 	require_once("../header_footer/footerAdmin.php");
 ?>

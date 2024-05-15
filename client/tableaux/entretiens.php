@@ -29,7 +29,7 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
                                         <h6>DATE DE L'ENTRETIEN :</h6>
                                     </div>
                                     <div class=\"col-md-9\">
-                                        <p>" . $entretien->getDateEntretienStr() . "</p>
+                                        <p>" . $entretien->getDateEntretienTab() . "</p>
                                     </div>
                                 </div>";
                         $data .= "<div class=\"row\">
@@ -66,7 +66,7 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
         }
 		?>
 		<div class="text-center mb-3">
-			<a class="btn btn-primary" href='/client/accueil.php'>Retour</a>
+			<a class="btn btn-dark" href='/client/accueil.php'>Retour</a>
 		</div>
 	</div>
 </section>

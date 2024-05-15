@@ -4667,6 +4667,7 @@ textarea.form-control-lg {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  backdrop-filter: blur(8px); /* Ajouter le flou à l'arrière-plan */
 }
 
 .alert-heading {

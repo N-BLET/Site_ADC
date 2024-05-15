@@ -74,7 +74,7 @@ require_once("../header_footer/header.php");
 			}
 		?>
 		<div class="text-center mb-3">
-			<a class="btn btn-primary" href='/client/accueil.php'>Retour</a>
+			<a class="btn btn-dark" href='/client/accueil.php'>Retour</a>
 		</div>
 	</div>
 </div>

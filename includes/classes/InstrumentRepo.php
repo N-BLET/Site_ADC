@@ -128,7 +128,7 @@ class InstrumentRepo
 			$BD = connexionBD();
 		} 
 
-        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, fkIdClient " .
+        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
 		"FROM `INSTRUMENT` " .
 		"JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
 		"WHERE `CLIENT`.idClient = :id;";
