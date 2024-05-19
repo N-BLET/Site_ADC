@@ -67,8 +67,7 @@ class LocationRepo
 		}
 
 		echo $idClient;
-
-        $SQL = "SELECT idLocation, DATE_FORMAT (dateLocation, '%d/%m/%Y') AS dateLocation, DATE_FORMAT (finLocation, '%d/%m/%Y') AS finLocation, fkIdInstruLoc, fkIdForfait, fkIdClient, duree, tarif " .
+		$SQL = "SELECT idLocation, DATE_FORMAT (dateLocation, '%d/%m/%Y') AS dateLocation, DATE_FORMAT (finLocation, '%d/%m/%Y') AS finLocation, fkIdForfait, fkIdClient, fkIdInstrument ".
 			"FROM `LOCATION` " .
 			"JOIN `CLIENT` ON `LOCATION`.fkIdClient = `CLIENT`.idClient " .
 			"JOIN `FORFAIT` ON `LOCATION`.fkIdForfait = `FORFAIT`.idForfait " .
@@ -79,7 +78,7 @@ class LocationRepo
         if ($requete = $BD->prepare($SQL)) {
             if ($requete->execute(array(':id' => $idClient))) {
                 while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
-                    $location = new Location($resultat["idLocation"], $resultat["dateLocation"], $resultat["finLocation"], $resultat["fkIdInstruLoc"], $resultat["fkIdForfait"], $resultat["fkIdClient"], $resultat["duree"], $resultat["tarif"]);
+                    $location = new Location($resultat["idLocation"], $resultat["dateLocation"], $resultat["finLocation"], $resultat["fkIdForfait"], $resultat["fkIdClient"], $resultat["fkIdInstrument"]);
                     array_push($locations, $location);
                 }
             } else {
