@@ -12,7 +12,7 @@ if (isset($_GET["idSuppression"])) {
 	}
 }
 
-$lesInstruments = InstrumentRepo::getInstruments();
+$lesInstruments = InstrumentRepo::getInstrumentsClient();
 $message = "";
 
 if (isset($_GET["idSuppression"])){

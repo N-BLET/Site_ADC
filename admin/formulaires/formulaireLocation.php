@@ -4,13 +4,14 @@ require_once("../header_footer/headerAdmin.php");
 
 // Gestion des variables de la page
 $location = new Location(0, date('Y-m-d'), date('Y-m-d'), 0, 0, 0);
-$lesInstruments = InstrumentRepo::getInstrumentsLocation();
+$lesInstruments = InstrumentRepo::getInstrumentsLibresLocation();
 $lesForfaits = ForfaitRepo::getForfaits();
 $lesClients = ClientRepo::getClients();
 $message = "";
 
 if (isset($_GET["id"])) {
 	$id = protectionDonneesFormulaire($_GET["id"]);
+	$lesInstruments = InstrumentRepo::getInstrumentsLocation();
 	$location = LocationRepo::getLocation($id);
 	if ($location == null)
 		header("location: /admin/index.php?locationInconnue");

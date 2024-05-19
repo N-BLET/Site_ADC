@@ -36,6 +36,30 @@ class InstrumentRepo
 			
 			$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
 			"FROM `INSTRUMENT` ";
+
+			$instruments  = array();
+
+			if ($requete = $BD->prepare($SQL)) {
+				if ($requete->execute()) {
+					while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
+						$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
+						array_push($instruments, $instrument);
+					}
+				} else
+					afficherErreurPDO(__FILE__, $requete);
+			}
+
+			return $instruments;
+		}
+
+		public static function getInstrumentsClient()
+		{
+			if(empty ($BD)){
+				$BD = connexionBD();
+			} 
+			
+			$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+			"FROM `INSTRUMENT` ";
 			if (empty($_GET["q"])){
 				$SQL .= "WHERE `INSTRUMENT`.parcLocation = false ";
 			}
@@ -102,6 +126,29 @@ class InstrumentRepo
 		return $instruments;
 	}
 
+	public static function getInstrumentsLibresLocation()
+	{
+		if(empty ($BD)){
+			$BD = connexionBD();
+		} 
+		
+        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+        "FROM `INSTRUMENT` WHERE `INSTRUMENT`.parcLocation = true AND `INSTRUMENT`.fkIdLocation is null;";
+	
+		$instruments  = array();
+
+		if ($requete = $BD->prepare($SQL)) {
+			if ($requete->execute()) {
+				while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
+					$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
+					array_push($instruments, $instrument);
+				}
+			} else
+				afficherErreurPDO(__FILE__, $requete);
+		}
+
+		return $instruments;
+	}
 
 	public static function getInstrumentLocation(int $idInstruLoc)
 	{
