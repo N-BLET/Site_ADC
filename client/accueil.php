@@ -40,7 +40,10 @@ require_once("./header_footer/header.php");
 				<h4 class="my-3">Location(s)</h4>
 			</div>
 		</div>
-	</div>	
+	</div>
+	<div class="text-center mt-4 mb=0">
+		<a class="btn btn-dark" href="../connexion/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+	</div>
 </section>
 
 <?php

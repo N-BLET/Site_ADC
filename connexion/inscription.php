@@ -25,6 +25,13 @@ if (isset($_GET["emailNonConforme4"]))
 if (isset($_GET["motDePasseNonConforme5"]))
 	$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Votre mot de passe n'est pas assez sécurisé. Veuillez créer un mot de passe d'au moins 8 caractères et comprenant :<ul><li>1 minuscule</li><li>1 Majuscule</li><li>1 chiffre</li> <li>et 1 caractère spécial</li></ul>C'est pour la sécurité de vos données, merci de votre compréhension.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 
+if (isset($_GET["inscriptionOK"]))
+	//Popup de confirmation
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre demande d'inscription a bien été prise en compte.<br/>
+	Vous venez de recevoir un mail afin de confirmer votre adresse mail.<br/>
+	Merci de cliquez sur le lien de ce mail afin de valider votre insription.
+	<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
 
 if (isset($_POST["btnInscription"])) {
 	if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["adresse"]) && isset($_POST["telephone"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["fkIdVille"])) {
