@@ -5,9 +5,9 @@ require_once("../header_footer/headerAdmin.php");
 if (isset($_GET["idSuppression"])) {
 	$id = protectionDonneesFormulaire($_GET["idSuppression"]);
 
-	$instruLocSuppression = Instrument_LocationRepo::getInstrument_Location($id);
+	$instruLocSuppression = InstrumentRepo::getInstrument($id);
 	if ($instruLocSuppression != null) {
-		if (!Instrument_LocationRepo::delete($instruLocSuppression))
+		if (!InstrumentRepo::delete($instruLocSuppression))
 			header("location: /admin/tableaux/instrument_Locations.php?erreurSuppression");
 	}
 }
