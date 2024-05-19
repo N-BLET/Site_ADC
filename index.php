@@ -366,10 +366,10 @@
             <div class="container-fluid card-footer">
                 <h4>Atelier des clarinettes</h4>
                 <div class="mb-0">
-                    <p>Le Bourg<br>42460 JARNOSSE</br></p>
+                    <p>Rue Sainte Cécile<br>69000 LYON</br></p>
                 </div>
                 <div class="mt-0">
-                    <p>Tél : 06.12.41.63.47</p>
+                    <p>Tél : 06.12.34.56.78</p>
                 </div>
                 <div class="container">
                     <div class="row align-items-center">

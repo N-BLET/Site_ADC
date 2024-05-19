@@ -112,8 +112,8 @@ if (isset($_GET["validationNOK"]))
 	<footer class="footer py-4">
 		<div class="container-fluid card-footer">
 			<h4>Atelier des clarinettes</h4>
-			<p>Le Bourg<br>42460 JARNOSSE</br></p>
-			<p>Tél : 06.12.41.63.47</p>
+			<p>Rue Sainte Cécile<br>69000 LYON</br></p>
+			<p>Tél : 06.12.34.56.78</p>
 			<p><a href="./../index.php">Retour sur le site</a></p>
 			<div class="container">
 				<div class="row align-items-center">
