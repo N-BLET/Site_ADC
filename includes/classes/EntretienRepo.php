@@ -34,7 +34,7 @@ class EntretienRepo
 		$SQL = "SELECT idEntretien, dateEntretien, descriptionEntretien, prixEntretien, fkIdInstrument, fkIdClient " .
 			"FROM `ENTRETIEN` " .
 			"LEFT JOIN `INSTRUMENT` ON `ENTRETIEN`.`fkIdInstrument` = `INSTRUMENT`.`idInstrument` " .
-            "LEFT JOIN `CLIENT` ON `INSTRUMENT`.`fkIdClient` = `CLIENT`.`idClient`; ";
+            "LEFT JOIN `CLIENT` ON `INSTRUMENT`.`fkIdClient` = `CLIENT`.`idClient` ";
 
 			if (!empty($_GET["q"])) {
 				$lettres = protectionDonneesFormulaire($_GET["q"]);
@@ -72,6 +72,30 @@ class EntretienRepo
 
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute(array(':id' => $idClient))) {
+				if ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
+					$entretien = new Entretien($resultat["idEntretien"], $resultat["dateEntretien"], $resultat["descriptionEntretien"], $resultat["prixEntretien"], $resultat["fkIdInstrument"], $resultat["fkIdClient"]);
+					array_push($entretiens, $entretien);
+				}
+			} else
+				afficherErreurPDO(__FILE__, $requete);
+		}
+
+		return $entretiens;
+	}
+
+	public static function getEntretiensSelonInstrument(int $idInstrument)
+	{
+		$BD = connexionBD();
+
+		$SQL = "SELECT idEntretien, dateEntretien, descriptionEntretien, prixEntretien, fkIdInstrument, fkIdClient " .
+			"FROM `ENTRETIEN` " .
+			"JOIN `INSTRUMENT` ON `ENTRETIEN`.`fkIdInstrument` = `INSTRUMENT`.`idInstrument` " .
+			"WHERE `INSTRUMENT`.idInstrument = :id;";
+
+			$entretiens  = array();
+
+		if ($requete = $BD->prepare($SQL)) {
+			if ($requete->execute(array(':id' => $idInstrument))) {
 				if ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
 					$entretien = new Entretien($resultat["idEntretien"], $resultat["dateEntretien"], $resultat["descriptionEntretien"], $resultat["prixEntretien"], $resultat["fkIdInstrument"], $resultat["fkIdClient"]);
 					array_push($entretiens, $entretien);

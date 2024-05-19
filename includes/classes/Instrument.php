@@ -26,10 +26,6 @@ class Instrument
 		$this->dateAchat = strtotime($dateAchat);
 		$this->parcLocation = $parcLocation;
 		$this->client = is_null($fkIdClient) ? null : ClientRepo::getClient($fkIdClient);
-		//$this->location = is_null($fkIdLocation) ? null : LocationRepo::getLocation($fkIdLocation);
-		// if($fkIdClient != null){
-		// 	$this->location = LocationRepo::getLocationSelonClient($fkIdClient);
-		// }
 		if($fkIdClient != null && $parcLocation){
 			$this->statutLocation = true;
 		}

@@ -18,14 +18,8 @@ class Entretien
 		$this->descriptionEntretien = $descriptionEntretien;
 		$this->prixEntretien = $prixEntretien;
 
-		// $this->fkIdInstrument = $fkIdInstrument ?? 0; // Remplace null par 0 si fkIdInstrument est null
-    	// $this->fkIdClient = $fkIdClient ?? 0; // Remplace null par 0 si fkIdClient est null
-
 		$this->instrument = ($fkIdInstrument !== null) ? InstrumentRepo::getInstrument($fkIdInstrument) : 0;
 		$this->client = ($fkIdClient !== null) ? ClientRepo::getClient($fkIdClient) : 0;
-
-		// $this->instrument = InstrumentRepo::getInstrument($fkIdInstrument) ?? 0;
-		// $this->client = ClientRepo::getClient($fkIdClient) ?? 0;
 	}
 
 	/* Getters/Setters */

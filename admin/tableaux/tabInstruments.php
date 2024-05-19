@@ -38,24 +38,24 @@ if (isset($_GET["Validation2"])){
 
 		<p><a class="btn btn-success" href='/admin/formulaires/formulaireInstrument.php'>Ajouter</a></p>
 
-		<form action="instruments.php" method="get" id="rechercheInstru">
+		<form action="tabInstruments.php" method="get" id="rechercheInstru">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
 
-		<form action="instruments.php" method="get" id="rechercheClient">
+		<form action="tabInstruments.php" method="get" id="rechercheClient">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -69,7 +69,7 @@ if (isset($_GET["Validation2"])){
 					<th>MODÈLE</th>
 					<th>N° DE SÉRIE</th>
 					<th>DATE D'ACHAT</th>
-					<th colspan="2">ACTIONS</th>
+					<th colspan="3">ACTIONS</th>
 				</tr>
 				<?php
 				$tr ="";
@@ -82,7 +82,8 @@ if (isset($_GET["Validation2"])){
 						$tr .= "<td>" . $instrument->GetModele() . "</td>";
 						$tr .= "<td>" . $instrument->GetNumeroSerie() . "</td>";
 						$tr .= "<td>" . $instrument->getDateAchatTab() . "</td>";
-						$tr .= "<td><a href='/admin/formulaires/formulaireInstrument.php?id=" . $instrument->GetIdInstrument() . "'><i class=\"far fa-edit\"></a></td>";					
+						$tr .= "<td><a href='/admin/tableaux/tabEntretiens.php?idInstrument=" . $instrument->GetIdInstrument() . "'><i class=\"fas fa-cog text-black-50\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireInstrument.php?id=" . $instrument->GetIdInstrument() . "'><i class=\"far fa-edit text-blue\"></a></td>";					
 						$tr .= "<td><a href='/admin/tableaux/tabInstruments.php?idSuppression=" . $instrument->GetIdInstrument() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}

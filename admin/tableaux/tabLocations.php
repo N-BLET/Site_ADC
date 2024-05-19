@@ -37,13 +37,13 @@ $lesLocations = LocationRepo::getLocations();
 
 		<p><a class="btn btn-success" href='/admin/formulaires/formulaireLocation.php'>Ajouter</a></p>
 
-		<form action="locations.php" method="get" id="recherche">
+		<form action="tabLocations.php" method="get" id="recherche">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché.">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -76,7 +76,7 @@ $lesLocations = LocationRepo::getLocations();
 						$tr .= "<td>" . $location->getForfait()->getDuree() . "</td>";	
 						$tr .= "<td>" . $location->getDateLocationTab() . "</td>";
 						$tr .= "<td>" . $location->getFinLocationTab() . "</td>";
-						$tr .= "<td><a href='/admin/formulaires/formulaireLocation.php?id=" . $location->GetIdLocation() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireLocation.php?id=" . $location->GetIdLocation() . "'><i class=\"far fa-edit text-blue\"></a></td>";
 						$tr .= "<td><a href='/admin/tableaux/tabLocations.php?idSuppression=" . $location->GetIdLocation() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}

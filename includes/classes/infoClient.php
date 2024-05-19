@@ -1,34 +1,43 @@
 <?php
 class InfoClient
 {
-
 	private $idClient;
 	private $nom;
 	private $prenom;
-    private $adresse;
-    private $telephone;
+	private $adresse;
+	private $telephone;
 	private $email;
 	private $password;
 	private $ville;
 	private $instrument;
-    private $entretien;
-    private $location;
+	private $entretien;
+	private $location;
+	private $fkIdVille;
 
 	/* Constructeur */
-	public function __construct(int $idClient, string $nom, string $prenom, string $adresse, string $telephone, string $email, string $password, int $fkIdVille)
+	public function __construct(int $idClient, string $nom, string $prenom, string $adresse, string $telephone, string $email, string $password, int $fkIdVille, int $idInstrument = null, int $idEntretien = null, int $idLocation = null)
 	{
 		$this->idClient = $idClient;
 		$this->nom = $nom;
 		$this->prenom = $prenom;
-        $this->adresse = $adresse;
+		$this->adresse = $adresse;
 		$this->telephone = $telephone;
-        $this->email = $email;
+		$this->email = $email;
 		$this->password = $password;
 		$this->fkIdVille = $fkIdVille;
 		$this->ville = VilleRepo::getVille($fkIdVille);
-		$this->instrument = InstrumentRepo::getInstrument($idInstrument);
-		$this->entretien = EntretienRepo::getEntretien($idEntretien);
-		$this->location = LocationRepo::getLocation($idLocation);
+
+		if ($idInstrument !== null) {
+			$this->instrument = InstrumentRepo::getInstrument($idInstrument);
+		}
+
+		if ($idEntretien !== null) {
+			$this->entretien = EntretienRepo::getEntretien($idEntretien);
+		}
+
+		if ($idLocation !== null) {
+			$this->location = LocationRepo::getLocation($idLocation);
+		}
 	}
 
 	/* Getters/Setters */

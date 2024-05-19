@@ -94,7 +94,7 @@ class ClientRepo
 		
 		if (!empty($_GET["q"])) {
 			$lettres = protectionDonneesFormulaire($_GET["q"]);
-			$SQL .= "WHERE nom LIKE \"%".$lettres."%\";";
+			$SQL .= "WHERE nom LIKE \"".$lettres."%\";";
 		}
 
 		$clients  = array();
@@ -197,26 +197,6 @@ class ClientRepo
 		}
 		return false;
 	}
-
-	// public static function delete(Client $client)
-	// {
-	// 	if(empty ($BD)){
-	// 		$BD = connexionBD();
-	// 	} 
-
-	// 	$data = [
-	// 		'idClient' => $client->getIdClient()
-	// 	];
-
-	// 	$SQL = "DELETE FROM CLIENT WHERE idClient = :idClient;";
-	// 	if ($requete = $BD->prepare($SQL)) {
-	// 		if ($requete->execute($data)) {
-	// 			return true;
-	// 		} else
-	// 			afficherErreurPDO(__FILE__, $requete);
-	// 	}
-	// 	return false;
-	// }
 
 	public static function delete(Client $client)
 {

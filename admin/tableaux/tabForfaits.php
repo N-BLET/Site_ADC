@@ -51,7 +51,7 @@ if (isset($_GET["Validation2"])){
 						$tr .= "<tr>";
 						$tr .= "<td>" . $forfait->GetDuree() . "</td>";
 						$tr .= "<td>" . prix($forfait->GetTarif()) . "</td>";
-						$tr .= "<td><a href='/admin/formulaires/formulaireForfait.php?id=" . $forfait->GetIdForfait() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireForfait.php?id=" . $forfait->GetIdForfait() . "'><i class=\"far fa-edit text-blue\"></a></td>";
 						$tr .= "<td><a href='/admin/tableaux/tabForfaits.php?idSuppression=" . $forfait->GetIdForfait() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";	
 					}

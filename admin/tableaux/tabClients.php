@@ -40,13 +40,13 @@ if (isset($_GET["validation2"])){
 
 		<p><a class="btn btn-success" href='/admin/formulaires/formulaireClient.php'>Ajouter</a></p>
 
-		<form action="clients.php" method="get" id="recherche">
+		<form action="tabClients.php" method="get" id="recherche">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -83,7 +83,7 @@ if (isset($_GET["validation2"])){
 						$tr .= "<td>" . $client->getValidationStatus() . "</td>";
 						$tr .= "<td>" . $client->GetJetonValidation() . "</td>";
 					
-						$tr .= "<td><a href='/admin/formulaires/formulaireClient.php?id=" . $client->GetIdClient() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireClient.php?id=" . $client->GetIdClient() . "'><i class=\"far fa-edit text-blue\"></a></td>";
 						$tr .= "<td><a href='/admin/tableaux/tabClients.php?suppressionId=" . $client->GetIdClient() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}

@@ -40,13 +40,13 @@ if (isset($_GET["Validation2"])){
 
 		<p><a class="btn btn-success mb-4" href='/admin/formulaires/formulaireVille.php'>Ajouter</a></p>
 		
-		<form action="villes.php" method="get" id="recherche">
+		<form action="tabVilles.php" method="get" id="recherche">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="q" id="q" placeholder="Rechercher par ville" value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -71,7 +71,7 @@ if (isset($_GET["Validation2"])){
 						$tr .= "<td>" . $ville->GetCp() . "</td>";
 						$tr .= "<td>" . $ville->GetDepartement() . "</td>";
 						$tr .= "<td>" . $ville->GetRegion() . "</td>";
-						$tr .= "<td><a href='/admin/formulaires/formulaireVille.php?id=" . $ville->GetIdVille() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireVille.php?id=" . $ville->GetIdVille() . "'><i class=\"far fa-edit text-blue\"></a></td>";
 						$tr .= "<td><a href='/admin/tableaux/tabVilles.php?idSuppression=" . $ville->GetIdVille() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}

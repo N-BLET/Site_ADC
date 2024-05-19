@@ -35,7 +35,7 @@ class VilleRepo
 			if (!empty($_GET["q"])) {
 				
 				$lettres = protectionDonneesFormulaire($_GET["q"]);
-				$SQL .= "WHERE nomVille LIKE \"%".$lettres."%\";";
+				$SQL .= "WHERE nomVille LIKE \"".$lettres."%\";";
 				}
 
 		$villes  = array();

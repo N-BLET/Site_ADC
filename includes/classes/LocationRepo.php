@@ -40,7 +40,7 @@ class LocationRepo
 		if (!empty($_GET["q"])) {
 			$lettres = protectionDonneesFormulaire($_GET["q"]);
 			$SQL .= "JOIN `CLIENT` ON `LOCATION`.fkIdClient = `CLIENT`.idClient " .
-			"WHERE nom LIKE \"%".$lettres."%\";";
+			"WHERE nom LIKE \"".$lettres."%\";";
 		}
 
         $locations  = array();

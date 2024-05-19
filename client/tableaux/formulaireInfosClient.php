@@ -8,13 +8,6 @@ $client = $_SESSION["Client"];
 $idClient = $client->getIdClient();
 $lesVilles=VilleRepo::getVilles();
 
-if (isset($_SESSION["Client"])) {
-	
-	$client = $_SESSION["Client"];
-	if ($client == null)
-		header("location: /client/index.php?clientInconnu");
-}
-
 if (isset($_POST["btnEnregistrer"])) {
 	if (isset($_POST["id"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["adresse"]) && isset($_POST["telephone"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["fkIdVille"]))  {
 		// Récupération des données du formulaire
@@ -63,6 +56,12 @@ if (isset($_POST["btnEnregistrer"])) {
 		}
 	} else
 		$message = "<div class=\"alert alert-warning\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+}
+
+if (isset($_SESSION["Client"]) ) {
+	$client = ClientRepo::getClient($idClient);
+	if ($client == null)
+		header("location: /client/index.php?clientInconnu");
 }
 
 ?>
@@ -133,10 +132,10 @@ if (isset($_POST["btnEnregistrer"])) {
 			</div>
             <div class="row g-2">
                 <div class="col-md-6 text-end">
-				    <a class="btn btn-primary" href='/client/tableaux/infosClient.php'>Annuler</a>
+				    <a class="btn btn-dark" href='/client/tableaux/infosClient.php'>Annuler</a>
 				</div>
 				<div class="col-md-6 text-start">
-					<input type="submit" class="btn btn-primary" name="btnEnregistrer" value="Enregistrer">
+					<input type="submit" class="btn btn-success name="btnEnregistrer" value="Enregistrer">
 				</div>
 			</div>
 		</form>
@@ -145,3 +144,4 @@ if (isset($_POST["btnEnregistrer"])) {
 <?php
 	require_once("../header_footer/footer.php");
 ?>
+				   

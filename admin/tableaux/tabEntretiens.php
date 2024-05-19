@@ -12,7 +12,13 @@ if (isset($_GET["idSuppression"])) {
 	}
 }
 
-$lesEntretiens = EntretienRepo::getEntretiens();
+if (isset($_GET["idInstrument"])) {
+	$idInstrument = protectionDonneesFormulaire($_GET["idInstrument"]);
+	$lesEntretiens = EntretienRepo::getEntretiensSelonInstrument($idInstrument);
+}else{
+	$lesEntretiens = EntretienRepo::getEntretiens();
+}
+
 $message = "";
 
 if (isset($_GET["idSuppression"])){
@@ -38,24 +44,24 @@ if (isset($_GET["Validation2"])){
 
 		<p><a class="btn btn-success" href='/admin/formulaires/formulaireEntretien.php'>Ajouter</a></p>
 
-		<form action="entretiens.php" method="get" id="rechercheInstru">
+		<form action="tabEntretiens.php" method="get" id="rechercheInstru">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercherInstru" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercherInstru" value="Rechercher">
 				</div>
 			</div>
 		</form>
 
-		<form action="entretiens.php" method="get" id="rechercheClient">
+		<form action="tabEntretiens.php" method="get" id="rechercheClient">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercherClient" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercherClient" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -87,7 +93,7 @@ if (isset($_GET["Validation2"])){
 						$tr .= "<td>" . $entretien->getDateEntretienTab() . "</td>";
 						$tr .= "<td>" . $entretien->GetDescriptionEntretien() . "</td>";
 						$tr .= "<td>" . prix($entretien->GetPrixEntretien()) . "</td>";
-						$tr .= "<td><a href='/admin/formulaires/formulaireEntretien.php?id=" . $entretien->GetIdEntretien() . "'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireEntretien.php?id=" . $entretien->GetIdEntretien() . "'><i class=\"far fa-edit text-blue\"></a></td>";
 						$tr .= "<td><a href='/admin/tableaux/tabEntretiens.php?idSuppression=" . $entretien->GetIdEntretien() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}
@@ -96,9 +102,18 @@ if (isset($_GET["Validation2"])){
 					echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Aucun entretien n'est répertorié.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 				}
 				?>
-
 			</table>
 		</div>
+		<?php
+		if (isset($_GET["idInstrument"])) {
+		?>
+			<div class="text-center">
+				<a class="btn btn-dark col-md-1 mx-1" href='./../tableaux/tabInstruments.php'>Retour</a>
+			</div>
+		<?php
+		}
+		?>
+
 	</div>
 </section>
 <?php

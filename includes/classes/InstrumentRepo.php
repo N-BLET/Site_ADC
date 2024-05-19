@@ -35,16 +35,18 @@ class InstrumentRepo
 			} 
 			
 			$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-			"FROM `INSTRUMENT` " .
-			"WHERE `INSTRUMENT`.parcLocation = false; ";
+			"FROM `INSTRUMENT` ";
+			if (empty($_GET["q"])){
+				$SQL .= "WHERE `INSTRUMENT`.parcLocation = false ";
+			}
 
 			if (!empty($_GET["q"])) {
 				$lettres = protectionDonneesFormulaire($_GET["q"]);
 				$SQL .= "JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
-				"WHERE nom LIKE \"%".$lettres."%\";";
+				"WHERE nom LIKE \"".$lettres."%\";";
 			}else if (!empty($_GET["r"])) {
 				$lettres = protectionDonneesFormulaire($_GET["r"]);
-				$SQL .= "WHERE numeroSerie LIKE \"%".$lettres."%\";";
+				$SQL .= "AND numeroSerie LIKE \"".$lettres."%\";";
 			}
 
 
@@ -70,16 +72,18 @@ class InstrumentRepo
 		} 
 		
         $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-        "FROM `INSTRUMENT` " .
-		"WHERE `INSTRUMENT`.parcLocation = true; ";
+        "FROM `INSTRUMENT` ";
+		if (empty($_GET["q"])){
+			$SQL .= "WHERE `INSTRUMENT`.parcLocation = true ";
+		}
 
 		if (!empty($_GET["q"])) {
 			$lettres = protectionDonneesFormulaire($_GET["q"]);
 			$SQL .= "JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
-			"WHERE nom LIKE \"%".$lettres."%\";";
+			"WHERE nom LIKE \"".$lettres."%\";";
 		}else if (!empty($_GET["r"])) {
 			$lettres = protectionDonneesFormulaire($_GET["r"]);
-			$SQL .= "WHERE numeroSerie LIKE \"%".$lettres."%\";";
+			$SQL .= "AND numeroSerie LIKE \"".$lettres."%\";";
 		}
 
 
@@ -88,7 +92,7 @@ class InstrumentRepo
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute()) {
 				while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
-					$instrument = new Instrument($resultat["idInstrument"],  $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
+					$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
 					array_push($instruments, $instrument);
 				}
 			} else

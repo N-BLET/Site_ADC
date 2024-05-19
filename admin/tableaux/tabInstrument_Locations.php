@@ -13,7 +13,6 @@ if (isset($_GET["idSuppression"])) {
 }
 
 $lesinstruLocs = InstrumentRepo::getInstrumentsLocation();
-//$lesClients = 
 $message = "";
 
 
@@ -40,35 +39,35 @@ if (isset($_GET["Validation2"])){
 
 		<p><a class="btn btn-success" href='/admin/formulaires/formulaireInstrument.php?type=location'>Ajouter</a></p>
 
-		<form action="instrument_Locations.php" method="get" id="rechercheType">
+		<form action="tabInstrument_Locations.php" method="get" id="rechercheType">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="s" id="s" placeholder="Veuillez insérer le type d'instruments recherchés." value="<?= htmlentities($_GET['s'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercher" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
 				</div>
 			</div>
 		</form>
 
-		<form action="instrument_Locations.php" method="get" id="rechercheModele">
+		<form action="tabInstrument_Locations.php" method="get" id="rechercheModele">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer le modèle d'instruments recherchés." value="<?= htmlentities($_GET['q'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercherClient" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercherClient" value="Rechercher">
 				</div>
 			</div>
 		</form>
 
-		<form action="instrument_Locations.php" method="get" id="rechercheInstru">
+		<form action="tabInstrument_Locations.php" method="get" id="rechercheInstru">
 			<div class="row">
 				<div class="col-8">
 					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
 				</div>
 				<div class="col-4">
-					<input type="submit" class="btn btn-info mb-4" name="btnRechercherClient" value="Rechercher">
+					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercherClient" value="Rechercher">
 				</div>
 			</div>
 		</form>
@@ -101,8 +100,8 @@ if (isset($_GET["Validation2"])){
 						}else{
 							$tr .= "<td>aucun</td>";
 						}
-						$tr .= "<td><a href='/admin/formulaires/formulaireEntretien.php'><i class=\"fa-solid fa-gear\"></a></td>";
-						$tr .= "<td><a href='/admin/formulaires/formulaireInstrument.php?id=" . $instruLoc->GetIdInstrument() . "&type=location'><i class=\"far fa-edit\"></a></td>";
+						$tr .= "<td><a href='/admin/tableaux/tabEntretiens.php?idInstrument=" . $instruLoc->GetIdInstrument() . "'><i class=\"fas fa-cog text-black-50\"></a></td>";
+						$tr .= "<td><a href='/admin/formulaires/formulaireInstrument.php?id=" . $instruLoc->GetIdInstrument() . "&type=location'><i class=\"far fa-edit text-blue\"></a></td>";
 						$tr .= "<td><a href='/admin/tableaux/tabInstrument_Locations.php?idSuppression=" . $instruLoc->GetIdInstrument() . "'><i class=\"far fa-trash-alt text-danger\"></a></td>";
 						$tr .= "</tr>";
 					}
