@@ -104,10 +104,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `nfa021ProjetV2`;
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-09-01', '2022-09-01', 2, 2, 13, NULL);
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-01-05', '2021-04-05', 5, 1, 14, NULL);
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 3, 1, 15, NULL);
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 6, 2, 16, NULL);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-09-01', '2022-09-01', 2, 2, 13, 1);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-01-05', '2021-04-05', 5, 1, 14, 1);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 3, 1, 15, 1);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 6, 2, 16, 1);
 
 COMMIT;
 

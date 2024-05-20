@@ -12,19 +12,20 @@ services:
       - 8080:80
     depends_on:
       - site_adc_mysql
+    env_file:
+      - .env
 
   site_adc_mysql:
     image: mysql:8.0
     container_name: site_adc_mysql
     restart: unless-stopped
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: nfa021ProjetV2
-      # MYSQL_ROOT_PASSWORD: ''
-      # MYSQL_USER: test
-      # MYSQL_PASSWORD: ''
+      MYSQL_DATABASE: ${BD_BASE}
+      MYSQL_ROOT_PASSWORD: ${BD_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
+    env_file:
+      - .env
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -33,11 +34,13 @@ services:
     ports:
       - 8081:80
     environment:
-      PMA_HOST: site_adc_mysql
-      PMA_USER: root
-      PMA_PASSWORD: ''
+      PMA_HOST: ${BD_HOST}
+      PMA_USER: ${BD_USER}
+      PMA_PASSWORD: ${BD_PASSWORD}
     depends_on:
       - site_adc_mysql
+    env_file:
+      - .env
 
 volumes:
   db_data:
