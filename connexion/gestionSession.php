@@ -1,5 +1,5 @@
 <?php
-require_once('C:/wamp64/www/NFA021-ADC/includes/page.inc.php');
+require_once(dirname(__FILE__) . '/../includes/page.inc.php');
 
 session_start();
 

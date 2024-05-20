@@ -42,31 +42,31 @@ COMMIT;
 -- -----------------------------------------------------------
 START TRANSACTION;
 USE `nfa021ProjetV2`;
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Tosca', '662020', '2014-01-01', false, 3);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Tosca', '727644', '2019-01-01', false, 4);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Légende', '686757', '2020-01-01', false, 5);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Festival', '686771', '2015-01-01', false, 1);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en La', 'BUFFET CRAMPON', 'RC', '709584', '2017-01-01', false, 5);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette Basse', 'BUFFET CRAMPON', 'Prestige', 'H42587', '2007-01-01', false, 3);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette Basse', 'BUFFET CRAMPON', 'Prestige', '33977', '2006-01-01', false, 1);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Mib', 'BUFFET CRAMPON', 'RC', '507566', '2003-01-01', false, 4);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'E13', '123456', '2015-01-01', false, 3);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'E13', '654321', '2020-01-01', false, 2);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prodige', '112233', '2018-01-01', false, 6);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prodige', '332211', '2021-01-01', false, 6);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Tosca', '662020', '2014-01-01', false, 3);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Tosca', '727644', '2019-01-01', false, 4);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Légende', '686757', '2020-01-01', false, 5);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Festival', '686771', '2015-01-01', false, 1);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en La', 'BUFFET CRAMPON', 'RC', '709584', '2017-01-01', false, 5);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette Basse', 'BUFFET CRAMPON', 'Prestige', 'H42587', '2007-01-01', false, 3);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette Basse', 'BUFFET CRAMPON', 'Prestige', '33977', '2006-01-01', false, 1);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Mib', 'BUFFET CRAMPON', 'RC', '507566', '2003-01-01', false, 4);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'E13', '123456', '2015-01-01', false, 3);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'E13', '654321', '2020-01-01', false, 2);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prodige', '112233', '2018-01-01', false, 6);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prodige', '332211', '2021-01-01', false, 6);
 
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Tosca', '012345', '2016-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'Tosca', '123456', '2018-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en La', 'BUFFET CRAMPON', 'Légende', '654321', '2019-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Mib', 'BUFFET CRAMPON', 'Festival', '543210', '2015-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette Basse', 'BUFFET CRAMPON', 'RC', '45679', '2017-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette Alto', 'BUFFET CRAMPON', 'Prestige', '987654', '2008-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prestige', '654321', '2007-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en La', 'BUFFET CRAMPON', 'RC', '147258', '2004-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'E13', '963852', '2016-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'E13', '159753', '2021-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'Prodige', '753951', '2019-01-01', true);
-INSERT INTO `nfa021Projetv2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prodige', '357159', '2012-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Tosca', '012345', '2016-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'Tosca', '123456', '2018-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en La', 'BUFFET CRAMPON', 'Légende', '654321', '2019-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Mib', 'BUFFET CRAMPON', 'Festival', '543210', '2015-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette Basse', 'BUFFET CRAMPON', 'RC', '45679', '2017-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette Alto', 'BUFFET CRAMPON', 'Prestige', '987654', '2008-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prestige', '654321', '2007-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en La', 'BUFFET CRAMPON', 'RC', '147258', '2004-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'E13', '963852', '2016-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'E13', '159753', '2021-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Ut', 'BUFFET CRAMPON', 'Prodige', '753951', '2019-01-01', true);
+INSERT INTO `nfa021ProjetV2`.`INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`) VALUES (DEFAULT, 'Clarinette en Sib', 'BUFFET CRAMPON', 'Prodige', '357159', '2012-01-01', true);
 
 COMMIT;
 
@@ -104,10 +104,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `nfa021ProjetV2`;
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`) VALUES (DEFAULT, '2021-09-01', '2022-09-01', 2, 2, 13);
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`) VALUES (DEFAULT, '2021-01-05', '2021-04-05', 5, 1, 14);
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 3, 1, 15);
-INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 6, 2, 16);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-09-01', '2022-09-01', 2, 2, 13, NULL);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-01-05', '2021-04-05', 5, 1, 14, NULL);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 3, 1, 15, NULL);
+INSERT INTO `nfa021ProjetV2`.`LOCATION` (`idLocation`, `dateLocation`, `finLocation`, `fkIdClient`, `fkIdForfait`, `fkIdInstrument`, `fkIdInstruLoc`) VALUES (DEFAULT, '2021-05-01', '2021-08-01', 6, 2, 16, NULL);
 
 COMMIT;
 
