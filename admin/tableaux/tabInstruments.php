@@ -41,7 +41,7 @@ if (isset($_GET["Validation2"])){
 		<form action="tabInstruments.php" method="get" id="rechercheInstru">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
+					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? '')?>">
 				</div>
 				<div class="col-4">
 					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
@@ -52,7 +52,7 @@ if (isset($_GET["Validation2"])){
 		<form action="tabInstruments.php" method="get" id="rechercheClient">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
+					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? '')?>">
 				</div>
 				<div class="col-4">
 					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">

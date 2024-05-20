@@ -145,8 +145,8 @@ require_once("../client/header_footer/header.php"); ?>
 			<input type="submit" class="btn btn-primary" name="btnInscription" value="Envoyer" />
 		</form>
 	</div>
-	<div class="text-center">
-		<a href="/connexion/index.php">Retour connexion</a>
+	<div class="text-center mt-5 mb-3">
+		<a class="btn btn-dark" href="/connexion/index.php">Retour connexion</a>
 	</div>
 </div>
 

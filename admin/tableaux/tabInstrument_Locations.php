@@ -42,7 +42,7 @@ if (isset($_GET["Validation2"])){
 		<form action="tabInstrument_Locations.php" method="get" id="rechercheType">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" class="form-control" name="s" id="s" placeholder="Veuillez insérer le type d'instruments recherchés." value="<?= htmlentities($_GET['s'] ?? null)?>">
+					<input type="text" class="form-control" name="s" id="s" placeholder="Veuillez insérer le type d'instruments recherchés." value="<?= htmlentities($_GET['s'] ?? '')?>">
 				</div>
 				<div class="col-4">
 					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">
@@ -53,7 +53,7 @@ if (isset($_GET["Validation2"])){
 		<form action="tabInstrument_Locations.php" method="get" id="rechercheModele">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer le modèle d'instruments recherchés." value="<?= htmlentities($_GET['q'] ?? null)?>">
+					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer le modèle d'instruments recherchés." value="<?= htmlentities($_GET['q'] ?? '')?>">
 				</div>
 				<div class="col-4">
 					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercherClient" value="Rechercher">
@@ -64,7 +64,7 @@ if (isset($_GET["Validation2"])){
 		<form action="tabInstrument_Locations.php" method="get" id="rechercheInstru">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? null)?>">
+					<input type="text" class="form-control" name="r" id="r" placeholder="Veuillez insérer le numéro de série de l'instrument recherché." value="<?= htmlentities($_GET['r'] ?? '')?>">
 				</div>
 				<div class="col-4">
 					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercherClient" value="Rechercher">

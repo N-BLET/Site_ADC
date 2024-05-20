@@ -2,14 +2,9 @@
 require_once("./../../connexion/gestionSession.php");
 require_once("../header_footer/header.php");
 
-// Gestion des variables de la page
-/*echo "<pre>";
-echo $_SESSION;
-echo "</pre>";*/
 
 $client = $_SESSION["Client"];
 $idClient = $client->getIdClient();
-echo $idClient . " TOTO !!!";
 $lesLocations = LocationRepo::getLocationSelonClient($idClient);
 require_once("../header_footer/header.php");
 ?>
@@ -69,7 +64,7 @@ require_once("../header_footer/header.php");
 			echo $data;
 			}else {
 				echo "<div class=\"container text-center my-4\">
-						<div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun contrat de location n'est en cours.</div>
+						<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Aucun contrat de location n'est en cours.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>
 					</div>";
 			}
 		?>
