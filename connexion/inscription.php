@@ -163,9 +163,7 @@ require_once("../client/header_footer/header.php"); ?>
 			const email = emailInput.value;
 			emailError.style.display = "none";
 
-			if (validateEmail(email)) {
-				checkEmailUniqueness(email);
-			} else {
+			if (!validateEmail(email)) {
 				showEmailError("L'adresse email est invalide.");
 			}
 		});
@@ -177,25 +175,6 @@ require_once("../client/header_footer/header.php"); ?>
 		function validateEmail(email) {
 			const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 			return re.test(email);
-		}
-
-		function checkEmailUniqueness(email) {
-			$.ajax({
-				url: '../includes/page.inc.php', // Mettez à jour l'URL du script PHP
-				method: 'POST',
-				data: {
-					email: email
-				},
-				success: function(response) {
-					response = JSON.parse(response); // Convertir la réponse JSON
-					if (response.exists) {
-						showEmailError("L'adresse email est déjà répertoriée.<br/>Veuillez en saisir une autre.");
-					}
-				},
-				error: function() {
-					showEmailError("Une erreur s'est produite lors de la vérification de l'email.");
-				}
-			});
 		}
 
 		function showEmailError(message) {
@@ -285,30 +264,32 @@ require_once("../client/header_footer/header.php"); ?>
 	document.addEventListener("DOMContentLoaded", function() {
 		const form = document.querySelector("form");
 
-		form.addEventListener("submit", function(event) {
-			event.preventDefault();
+		// form.addEventListener("submit", function(event) {
+		// 	event.preventDefault();
 
-			const inputs = form.querySelectorAll("input, select");
-			let isValid = true;
+		// 	const inputs = form.querySelectorAll("input, select");
+		// 	let isValid = true;
 
-			inputs.forEach(function(input) {
-				if (input.required && !input.value.trim()) {
-					isValid = false;
-					showFieldError(input, "Ce champ est requis.");
-				} else {
-					hideFieldError(input);
-				}
-			});
+		// 	inputs.forEach(function(input) {
+		// 		if (input.required && !input.value.trim()) {
+		// 			isValid = false;
+		// 			showFieldError(input, "Ce champ est requis.");
+		// 		} else {
+		// 			hideFieldError(input);
+		// 		}
+		// 	});
 
-			if (isValid) {
-				// Si le formulaire est valide, vous pouvez maintenant soumettre le formulaire
-				form.submit();
+		// 	if (isValid) {
+		// 		// Si le formulaire est valide, vous pouvez maintenant soumettre le formulaire
+		// 		form.submit();
 
-				// Ajoutez ici le code pour ajouter la classe "success" au bouton de soumission si nécessaire
-				const submitButton = document.querySelector("input[type=submit]");
-				submitButton.classList.add("success");
-			}
-		});
+		// 		// Ajoutez ici le code pour ajouter la classe "success" au bouton de soumission si nécessaire
+		// 		const submitButton = document.querySelector("input[type=submit]");
+		// 		submitButton.className("btn btn-success");
+		// 	}else{
+		// 		submitButton.className("btn btn-primary");
+		// 	}
+		// });
 
 		function showFieldError(input, message) {
 			const errorElement = input.nextElementSibling;
