@@ -43,7 +43,7 @@ if (isset($_GET["validation2"])){
 		<form action="tabClients.php" method="get" id="recherche">
 			<div class="row">
 				<div class="col-8">
-					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? null)?>">
+					<input type="text" class="form-control" name="q" id="q" placeholder="Veuillez insérer les premières lettres du nom du client recherché." value="<?= htmlentities($_GET['q'] ?? '')?>">
 				</div>
 				<div class="col-4">
 					<input type="submit" class="btn custom-btn-info mb-4" name="btnRechercher" value="Rechercher">

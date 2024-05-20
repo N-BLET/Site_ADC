@@ -1,5 +1,6 @@
 <?php
 require_once("../includes/page.inc.php");
+ob_start();
 
 // Gestion des variables de la page
 $client = new Client(0, "", "", "", "", "", "", false, false, "", 0);
@@ -63,16 +64,16 @@ if (isset($_POST["btnInscription"])) {
 		$client->setEmail($email);
 
 		$indice = testpassword($password);
-		if ($indice<100) {
+		if ($indice < 100) {
 			header("location: /connexion/inscription.php?motDePasseNonConforme5");
 		}
-		
+
 		$mdpClient = password_hash($password, PASSWORD_DEFAULT);
 		$client->setPassword($mdpClient);
 
 		if (!ClientRepo::insert($client)) {
 			$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-		}else {
+		} else {
 			// Envoi du mail
 			$contenu = "Merci de valider votre mail en cliquant sur le lien suivant : http://localhost/nfa021-adc/connexion/validation.php?jeton=" . $client->getJetonValidation();
 
@@ -80,150 +81,255 @@ if (isset($_POST["btnInscription"])) {
 				header("location: /connexion/inscription.php?inscriptionOK");
 			}
 		}
-
-	}else{
+	} else {
 		$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 	}
-	
 }
-?>
-<!doctype html>
-<html lang="fr">
+require_once("../client/header_footer/header.php"); ?>
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
-    <title>Atelier des clarinettes</title>
-	<!-- Favicon-->
-	<link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
-	<!-- Font Awesome icons (free version)-->
-	<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-	<!-- Google fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="../css/styles.css" rel="stylesheet" />
-</head>
+<div class="container" style="height:25px;">
+	<p></p>
+</div>
+<div class="container mt-5">
 
-<body id="page-top">
-	<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand" href="#page-top"><img src="../assets/img/logo.jpg" alt="Logo Atelier Des Clarinettes" /></a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-				Menu
-				<i class="fas fa-bars ms-1"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-					<li class="nav-item"><a class="nav-link text-ligth" href="/index.php#services">Services</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="/index.php#entretien">Entretien</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="/index.php#location">Location</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="/index.php#portfolio">Vente</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="/index.php#equipe">L'équipe</a></li>
-					<li class="nav-item"><a class="nav-link text-light" href="/index.php#contact">Contact</a></li>
-				</ul>
-				<a class="btn btn-primary btn-social mx-2" href="https://www.facebook.com/latelierdesclarinettes"><i class="fab fa-facebook-f"></i></a>
-			</div>
-		</div>
-	</nav>
-
-	<div class="container" style="height:25px;">
-		<p></p>
+	<div class="card-header bg-warning text-dark">
+		<h2>Inscription</h2>
 	</div>
-	<div class="container mt-5">
+	<div class="card-body bg-dark text-light rounded-bottom">
+		<?php
+		if (strlen($message) > 0) {
+			echo $message;
+		}
+		?>
 
-		<div class="card-header bg-warning text-dark">
-			<h2>Inscription</h2>
-		</div>
-		<div class="card-body bg-dark text-light rounded-bottom">
-			<?php
-			if (strlen($message) > 0) {
-				echo $message;
-			}
-			?>
-
-			<form action="inscription.php" method="post">
+		<form action="inscription.php" method="post">
 			<div class="form-group">
 				<label for="nom">Nom :</label>
-				<input type="text" class="form-control" id="nom" name="nom"
-				value="<?php echo $client->getNom() ?>" placeholder="Veuillez saisir votre nom." required>
-				</div>
+				<input type="text" class="form-control" id="nom" name="nom" value="<?php echo $client->getNom() ?>" placeholder="Veuillez saisir votre nom." required>
+			</div>
 			<div class="form-group">
 				<label for="prenom">Prénom :</label>
-				<input type="text" class="form-control" id="prenom" name="prenom"
-				value="<?php echo $client->getPrenom() ?>" placeholder="Veuillez saisir votre prénom." required>
+				<input type="text" class="form-control" id="prenom" name="prenom" value="<?php echo $client->getPrenom() ?>" placeholder="Veuillez saisir votre prénom." required>
 			</div>
 			<div class="form-group">
 				<label for="adresse">Adresse :</label>
-				<input type="text" class="form-control" id="adresse" name="adresse"
-				value="<?php echo $client->getAdresse() ?>" placeholder="Veuillez saisir votre adresse - Ex: 7 rue des Lilas." required>
+				<input type="text" class="form-control" id="adresse" name="adresse" value="<?php echo $client->getAdresse() ?>" placeholder="Veuillez saisir votre adresse - Ex: 7 rue des Lilas." required>
 			</div>
 			<div class="form-group">
 				<label for="fkIdVille">Ville :</label>
 				<select class="form-select" id="fkIdVille" name="fkIdVille" required>
-						<option value="0">Choisissez une ville</option>
-						<?php
-						foreach ($lesVilles as $ville) {
-							echo "<option value=\"" . $ville->getIdVille() . "\">" . $ville->getNomVille() . "</option>";
-						}
-						?>
-					</select>
+					<option value="0">Choisissez une ville</option>
+					<?php
+					foreach ($lesVilles as $ville) {
+						echo "<option value=\"" . $ville->getIdVille() . "\">" . $ville->getNomVille() . "</option>";
+					}
+					?>
+				</select>
 			</div>
 			<div class="form-group">
-				<label for="ville">Téléphone :</label>
-				<input type="tel" class="form-control" id="telephone" name="telephone"
-				value="<?php echo $client->getTelephone() ?>" maxlength="10"
-				placeholder="Veuillez entrer votre numéro de téléphone - Ex: 0612345678" required>
+				<label for="telephone">Téléphone :</label>
+				<input type="tel" class="form-control" id="telephone" name="telephone" value="<?php echo $client->getTelephone() ?>" minlength="10" maxlength="10" placeholder="Veuillez entrer votre numéro de téléphone - Ex: 0612345678" required>
+				<div id="telephone-error" class="text-danger" style="display:none;"></div>
 			</div>
 			<div class="form-group">
 				<label for="email">Email :</label>
-				<input type="email" class="form-control" id="email" name="email"
-				value="<?php echo $client->getEmail() ?>"
-				placeholder="Veuillez entrer votre email - Ex: nom@operateur.fr" required>
+				<input type="email" class="form-control" id="email" name="email" value="<?php echo $client->getEmail() ?>" placeholder="Veuillez entrer votre email - Ex: nom@operateur.fr" required>
+				<div id="email-error" class="text-danger" style="display: none;"></div>
 			</div>
 			<div class="form-group mb-4">
 				<label for="password">Password :</label>
-				<input type="password" class="form-control" id="password" name="password"
-				value="" placeholder="Veuillez saisir un mot de passe d'au moins 8 caractères et comprenant 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
+				<input type="password" class="form-control" id="password" name="password" placeholder="Veuillez saisir un mot de passe d'au moins 8 caractères et comprenant 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial.">
+				<div id="password-error" class="text-danger" style="display:none;"></div>
 			</div>
 
 			<input type="submit" class="btn btn-primary" name="btnInscription" value="Envoyer" />
 		</form>
-
-		<div class="text-center">
-			<a href="/connexion/index.php">Retour connexion</a>
-		</div>
 	</div>
-		
-	<footer class="footer py-4">
-		<div class="container-fluid card-footer">
-			<h4>Atelier des clarinettes</h4>
-			<p>Le Bourg<br>42460 JARNOSSE</br></p>
-			<p>Tél : 06.12.41.63.47</p>
-			<p><a href="/index.php">Retour sur le site</a></p>
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-lg-12 my-3 my-lg-0">
-						Copyright &copy; Atelier des Clarinettes
-						<!-- This script automatically adds the current year to your website footer-->
-						<!-- (credit: https://updateyourfooter.com/)-->
-						<script>
-							document.write(new Date().getFullYear());
-						</script>
-					</div>
-					<div class="col-lg-12 my-3 my-lg-0 mt-2">
-						<a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/latelierdesclarinettes"><i class="fab fa-facebook-f"></i></a>
-					</div>
-				</div>
-			</div>     
-		</div>
-	</footer>
+	<div class="text-center">
+		<a href="/connexion/index.php">Retour connexion</a>
+	</div>
+</div>
+
+<?php require_once("../client/header_footer/footer.php"); ?>|
 </body>
 
-<!-- Bootstrap core JS-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="../js/scripts.js"></script>
+<script>
+	// Vérification de l'email, son format et son unicité
+	document.addEventListener("DOMContentLoaded", function() {
+		const emailInput = document.getElementById("email");
+		const emailError = document.getElementById("email-error");
+
+		emailInput.addEventListener("blur", function() {
+			const email = emailInput.value;
+			emailError.style.display = "none";
+
+			if (validateEmail(email)) {
+				checkEmailUniqueness(email);
+			} else {
+				showEmailError("L'adresse email est invalide.");
+			}
+		});
+
+		emailInput.addEventListener("input", function() {
+			emailError.style.display = "none";
+		});
+
+		function validateEmail(email) {
+			const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+			return re.test(email);
+		}
+
+		function checkEmailUniqueness(email) {
+			$.ajax({
+				url: '../includes/page.inc.php', // Mettez à jour l'URL du script PHP
+				method: 'POST',
+				data: {
+					email: email
+				},
+				success: function(response) {
+					response = JSON.parse(response); // Convertir la réponse JSON
+					if (response.exists) {
+						showEmailError("L'adresse email est déjà répertoriée.<br/>Veuillez en saisir une autre.");
+					}
+				},
+				error: function() {
+					showEmailError("Une erreur s'est produite lors de la vérification de l'email.");
+				}
+			});
+		}
+
+		function showEmailError(message) {
+			emailError.textContent = message;
+			emailError.style.display = "block";
+		}
+
+		function hideEmailError() {
+			emailError.style.display = "none";
+		}
+	});
+
+	// Vérification du numéro de téléphone
+	document.addEventListener("DOMContentLoaded", function() {
+		const telephoneInput = document.getElementById("telephone");
+		const telephoneError = document.getElementById("telephone-error");
+
+		telephoneInput.addEventListener("blur", function() {
+			validateTelephoneInput();
+		});
+
+		telephoneInput.addEventListener("input", function() {
+			validateTelephoneInput();
+		});
+
+		function validateTelephoneInput() {
+			const telephone = telephoneInput.value;
+			telephoneError.style.display = "none";
+
+			if (!validateTelephone(telephone)) {
+				showTelephoneError("Le numéro de téléphone est invalide.");
+			} else {
+				hideTelephoneError();
+			}
+		}
+
+		function validateTelephone(telephone) {
+			const re = /^0[1-9]\d{8}$/; // Regex pour valider les numéros de téléphone français au format 0XXXXXXXXX
+			return re.test(telephone);
+		}
+
+		function showTelephoneError(message) {
+			telephoneError.textContent = message;
+			telephoneError.style.display = "block";
+		}
+
+		function hideTelephoneError() {
+			telephoneError.style.display = "none";
+		}
+	});
+
+	// Vérification du format de mot de passe
+	document.addEventListener("DOMContentLoaded", function() {
+		const passwordInput = document.getElementById("password");
+		const passwordError = document.getElementById("password-error");
+
+		passwordInput.addEventListener("blur", validatePasswordInput);
+		passwordInput.addEventListener("input", validatePasswordInput);
+
+		function validatePasswordInput() {
+			const password = passwordInput.value;
+			passwordError.style.display = "none";
+
+			if (!validatePassword(password)) {
+				showPasswordError("Le mot de passe doit contenir au moins 8 caractères, avec au moins une majuscule, une minuscule, un chiffre et un caractère spécial.");
+			} else {
+				hidePasswordError();
+			}
+		}
+
+		function validatePassword(password) {
+			const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+			return re.test(password);
+		}
+
+		function showPasswordError(message) {
+			passwordError.textContent = message;
+			passwordError.style.display = "block";
+		}
+
+		function hidePasswordError() {
+			passwordError.style.display = "none";
+		}
+	});
+
+	// Vérification que tous les champs du formulaire soient remplis
+	document.addEventListener("DOMContentLoaded", function() {
+		const form = document.querySelector("form");
+
+		form.addEventListener("submit", function(event) {
+			event.preventDefault();
+
+			const inputs = form.querySelectorAll("input, select");
+			let isValid = true;
+
+			inputs.forEach(function(input) {
+				if (input.required && !input.value.trim()) {
+					isValid = false;
+					showFieldError(input, "Ce champ est requis.");
+				} else {
+					hideFieldError(input);
+				}
+			});
+
+			if (isValid) {
+				// Si le formulaire est valide, vous pouvez maintenant soumettre le formulaire
+				form.submit();
+
+				// Ajoutez ici le code pour ajouter la classe "success" au bouton de soumission si nécessaire
+				const submitButton = document.querySelector("input[type=submit]");
+				submitButton.classList.add("success");
+			}
+		});
+
+		function showFieldError(input, message) {
+			const errorElement = input.nextElementSibling;
+			if (errorElement && errorElement.classList.contains("error-message")) {
+				errorElement.textContent = message;
+				errorElement.style.display = "block";
+			} else {
+				const newErrorElement = document.createElement("div");
+				newErrorElement.textContent = message;
+				newErrorElement.classList.add("error-message");
+				newErrorElement.style.color = "red";
+				input.parentNode.insertBefore(newErrorElement, input.nextSibling);
+			}
+		}
+
+		function hideFieldError(input) {
+			const errorElement = input.nextElementSibling;
+			if (errorElement && errorElement.classList.contains("error-message")) {
+				errorElement.textContent = "";
+				errorElement.style.display = "none";
+			}
+		}
+	});
+</script>

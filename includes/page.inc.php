@@ -52,12 +52,12 @@ function verifEmail(string $mail)
 	/* Validation d'adresses email avec un regex */
 	$masque = "/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,4}$/";
 
-	if(preg_match($masque, $mail))  {
-	echo "L'adresse email '$mail' est valide.";
-	} else {
-		echo "<div class=\"alert alert-error\" role=\"alert\">Erreur : L'adresse email '$mail' est invalide.</div>";
-		header("location: /my-app/PROJET/Site/client/inscription.php?emailNonConforme2");
-	}
+	// if(preg_match($masque, $mail))  {
+	// echo "L'adresse email '$mail' est valide.";
+	// } else {
+	// 	echo "<div class=\"alert alert-error\" role=\"alert\">Erreur : L'adresse email '$mail' est invalide.</div>";
+	// 	header("location: /my-app/PROJET/Site/client/inscription.php?emailNonConforme2");
+	// }
 	return $mail;
 }
 
