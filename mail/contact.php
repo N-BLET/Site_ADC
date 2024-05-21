@@ -1,5 +1,6 @@
 <?php
 require_once("../includes/page.inc.php");
+require_once("/../constante.php");
 
 if (isset($_POST["btnEnvoyer"])){
    if(empty($_POST['nom']) && empty($_POST['email']) && empty($_POST['telephone']) && empty($_POST['sujet']) && empty($_POST['message']) && ($_POST['email'])) {
@@ -12,10 +13,10 @@ if (isset($_POST["btnEnvoyer"])){
       $sujet = protectionDonneesFormulaire($_POST['sujet']);
       $message = protectionDonneesFormulaire($_POST['message']);
       if (!verifEmail($email)) {
-         header("location: ".RACINE_SITE."/index.php?emailNonConforme");
+         header("location: ".SITE_PATH."/index.php?emailNonConforme");
       } else {
       recevoirMail($email, $sujet, $message);
-      header ("location: ".RACINE_SITE."/index.php?messageOk");
+      header ("location: ".SITE_PATH."/index.php?messageOk");
       }
    }
 }

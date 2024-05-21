@@ -1,5 +1,6 @@
 <?php
 require_once("../includes/page.inc.php");
+require_once("../constante.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -75,7 +76,7 @@ if (isset($_POST["btnInscription"])) {
 			$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 		} else {
 			// Envoi du mail
-			$contenu = "Merci de valider votre mail en cliquant sur le lien suivant : http://localhost/nfa021-adc/connexion/validation.php?jeton=" . $client->getJetonValidation();
+			$contenu = "Merci de valider votre mail en cliquant sur le lien suivant : " . SITE_PATH . "/connexion/validation.php?jeton=" . $client->getJetonValidation();
 
 			if (envoyerMail($client->getEmail(), "Valider votre inscription", $contenu)) {
 				header("location: /connexion/inscription.php?inscriptionOK");

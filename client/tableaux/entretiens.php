@@ -61,7 +61,7 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
             }
         }else {
             echo "<div class=\"container text-center my-4\">
-                    <div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun instrument n'est répertorié.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></div>
+                    <div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun instrument n'est répertorié.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>
                 </div>";
         }
 		?>

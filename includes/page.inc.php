@@ -1,6 +1,4 @@
 <?php
-// Racine du site
-define("pathGetSession", "/NFA021-ADC");
 
 // PHP Mailer
 use PHPMailer\PHPMailer\PHPMailer;
