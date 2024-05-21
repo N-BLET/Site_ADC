@@ -54,14 +54,14 @@ $lesEntretiens = EntretienRepo::getEntretiensSelonClient($idClient);
                     echo $data;
                 }else {
                     echo "<div class=\"container text-center my-4\">
-                            <div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun entretien n'a été effectué sur vos instrument.</div>
+                            <div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun entretien n'a été effectué sur vos instrument.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>
                         </div>";
                 
                 }  
             }
         }else {
             echo "<div class=\"container text-center my-4\">
-                    <div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun instrument n'est répertorié.</div>
+                    <div class=\"alert alert-warning text-dark\" role=\"alert\">Aucun instrument n'est répertorié.<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></div>
                 </div>";
         }
 		?>
