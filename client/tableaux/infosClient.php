@@ -5,6 +5,11 @@ require_once("../header_footer/header.php");
 // Gestion des variables de la page
 $client = $_SESSION["Client"];
 $message = "";
+
+if (isset($_GET["validation"])){
+	$message = "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">Votre modification a bien été prise en compte !<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	echo $message;
+}
 ?>
 
 <section class="container">
