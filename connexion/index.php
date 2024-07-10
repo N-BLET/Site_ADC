@@ -29,6 +29,27 @@ if (isset($_GET["validationDejaOK"]))
 if (isset($_GET["validationNOK"]))
 	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Votre validation n'est pas effectuée. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 
+if (isset($_GET["clientInconnu"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Ce client est inconnu. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["entretienInconnu"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Cet entretien n'est pas répertorié. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["forfaitInconnu"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Ce forfait n'est pas répertorié. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["instrument_LocationInconnu"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Cet instrument de location n'est pas répertorié. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["instrumentInconnu"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Cet instrument n'est pas répertorié. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["locationInconnue"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Cette location n'est pas répertoriée. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
+if (isset($_GET["villeInconnue"]))
+	$message = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Cette ville n'est pas répertoriée. <button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+
 require_once("../client/header_footer/header.php"); ?>
 
 
