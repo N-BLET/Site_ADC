@@ -9,7 +9,7 @@ services:
       - .:/var/www/html/
     user: 1000:1000
     ports:
-      - 8080:80
+      - 8082:80
     depends_on:
       - site_adc_mysql
     env_file:

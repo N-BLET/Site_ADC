@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -13,7 +14,7 @@ if (isset($_GET["id"])) {
 	$entretien = EntretienRepo::getEntretien($id);
 	if ($entretien == null) {
 		ob_end_flush();
-		header("location: /admin/index.php?entretienInconnu");
+		redirect("../index.php?entretienInconnu");
 		exit;
 	}
 }
@@ -31,7 +32,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			$entretien = EntretienRepo::getEntretien($id);
 			if ($entretien == null) {
 				ob_end_flush();
-				header("location: /admin/index.php?entretienInconnu");
+				redirect("../../connexion/index.php?entretienInconnu");
 				exit;
 			}
 		}
@@ -48,7 +49,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				echo $message;
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabEntretiens.php?Validation1");
+				redirect("../tableaux/tabEntretiens.php?Validation1");
 				exit;
 			}
 		} else {
@@ -57,7 +58,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				echo $message;
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabEntretiens.php?Validation2");
+				redirect("../tableaux/tabEntretiens.php?Validation2");
 				exit;
 			}
 		}

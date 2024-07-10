@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
-require_once("../header_footer/headerAdmin.php");
+//require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -18,7 +19,7 @@ if (isset($_GET["id"])) {
 	$instrument = InstrumentRepo::getInstrument($id);
 	if ($instrument == null) {
 		ob_end_flush();
-		header("location: /admin/index.php?instrumentInconnu");
+		redirect("../index.php?instrumentInconnu");
 		exit;
 	}
 }
@@ -38,14 +39,14 @@ if (isset($_POST["btnEnregistrer"])) {
 			$instrument = InstrumentRepo::getInstrumentLocation($id);
 			if ($instrument == null) {
 				ob_end_flush();
-				header("location: /admin/index.php?instrumentInconnu");
+				redirect("../../connexion/index.php?instrument_LocationInconnu");
 				exit;
 			}
 		} else if ($id > 0) {
 			$instrument = InstrumentRepo::getInstrument($id);
 			if ($instrument == null) {
 				ob_end_flush();
-				header("location: /admin/index.php?instrumentInconnu");
+				redirect("../../connexion/index.php?instrumentInconnu");
 				exit;
 			}
 		}
@@ -60,6 +61,11 @@ if (isset($_POST["btnEnregistrer"])) {
 		} else {
 			$instrument->setFkIdClient($fkIdclient);
 		}
+		if (isset($_GET["type"]) && $_GET["type"] == "location") {
+			$instrument->setParcLocation(1);
+		} else {
+			$instrument->setParcLocation(0);
+		}
 
 		if ($id == 0) {
 			if (!InstrumentRepo::insert($instrument)) {
@@ -68,11 +74,11 @@ if (isset($_POST["btnEnregistrer"])) {
 			} else {
 				if ((isset($_GET["type"]) && $_GET["type"] == "location")) {
 					ob_end_flush();
-					header("location: /admin/tableaux/tabInstrument_Locations.php?Validation1");
+					redirect("../tableaux/tabInstrument_Locations.php?Validation1");
 					exit;
 				} else {
 					ob_end_flush();
-					header("location: /admin/tableaux/tabInstruments.php?Validation1");
+					redirect("../tableaux/tabInstruments.php?Validation1");
 					exit;
 				}
 			}
@@ -83,11 +89,11 @@ if (isset($_POST["btnEnregistrer"])) {
 			} else {
 				if ((isset($_GET["type"]) && $_GET["type"] == "location")) {
 					ob_end_flush();
-					header("location: /admin/tableaux/tabInstrument_Locations.php?Validation1");
+					redirect("../tableaux/tabInstrument_Locations.php?Validation1");
 					exit;
 				} else {
 					ob_end_flush();
-					header("location: /admin/tableaux/tabInstruments.php?Validation1");
+					redirect("../tableaux/tabInstruments.php?Validation1");
 					exit;
 				}
 			}

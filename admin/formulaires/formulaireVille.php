@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
-require_once("../header_footer/headerAdmin.php");
+//require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -12,7 +13,7 @@ if (isset($_GET["id"])) {
 	$ville = VilleRepo::getVille($id);
 	if ($ville == null) {
 		ob_end_flush();
-		header("location: /admin/index.php?villeInconnue");
+		redirect("../../connexion/index.php?villeInconnue");
 		exit;
 	}
 }
@@ -30,8 +31,8 @@ if (isset($_POST["btnEnregistrer"])) {
 			$ville = VilleRepo::getVille($id);
 			if ($ville == null) {
 				ob_end_flush();
-				header("location: /admin/villes.php?villeInconnue");
-				ob_end_flush();
+				redirect("../tableaux/tabVilles.php?villeInconnue");
+				exit;
 			}
 		}
 
@@ -45,7 +46,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else {
 				ob_end_flush();
-				header("location: /admin/tableaux/TabVilles.php?Validation1");
+				redirect("../tableaux/tabVilles.php?Validation1");
 				exit;
 			}
 		} else {
@@ -53,7 +54,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabVilles.php?Validation2");
+				redirect("../tableaux/tabVilles.php?Validation2");
 				exit;
 			}
 		}
@@ -83,7 +84,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			</div>
 			<div class="form-group">
 				<label for="cp">CODE POSTAL :</label>
-				<input type="number" class="form-control" id="cp" name="cp" value="<?php echo $ville->getCp() ?>" placeholder="Veuillez insérer un nombre à 5 chiffres" pattern=[0-9]{5} minlength="5" maxlength="5" required>
+				<input type="number" class="form-control" id="cp" name="cp" pattern="[0-9]{5}" minlength="5" maxlength="5" value="<?php echo $ville->getCp() ?>" placeholder="Veuillez insérer un nombre à 5 chiffres" pattern=[0-9]{5} minlength="5" maxlength="5" oninput="limitInput(this, 5)" onkeypress="return isNumberKey(event)" required>
 			</div>
 			<div class="form-group">
 				<label for="departement">DÉPARTEMENT :</label>
@@ -101,6 +102,20 @@ if (isset($_POST["btnEnregistrer"])) {
 		</form>
 	</div>
 </section>
+<script>
+	function limitInput(element, maxLength) {
+		if (element.value.length > maxLength) {
+			element.value = element.value.slice(0, maxLength);
+		}
+	}
+
+	function isNumberKey(evt) {
+		var charCode = (evt.which) ? evt.which : evt.keyCode;
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+			return false;
+		return true;
+	}
+</script>
 <?php
 require_once("../header_footer/footerAdmin.php");
 ?>

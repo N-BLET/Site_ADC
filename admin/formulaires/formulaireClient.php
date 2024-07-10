@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -13,7 +14,7 @@ if (isset($_GET["id"])) {
 	$client = ClientRepo::getClient($id);
 	if ($client == null) {
 		ob_end_flush();
-		header("location: /admin/index.php?clientInconnu");
+		redirect("../index.php?clientInconnu");
 		exit;
 	}
 }
@@ -34,7 +35,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			$client = ClientRepo::getClient($id);
 			if ($client == null) {
 				ob_end_flush();
-				header("location: /admin/index.php?clientInconnu");
+				redirect("../../connexion/index.php?clientInconnu");
 				exit;
 			} else {
 				$client->setJetonValidation(uniqid());
@@ -77,7 +78,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				echo $message;
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabClients.php?validation1");
+				redirect("../tableaux/tabClients.php?validation1");
 				exit;
 			}
 		} else {
@@ -86,7 +87,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				echo $message;
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabClients.php?validation2");
+				redirect("../tableaux/tabClients.php?validation2");
 				exit;
 			}
 		}

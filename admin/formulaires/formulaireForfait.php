@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -12,7 +13,7 @@ if (isset($_GET["id"])) {
 	$forfait = ForfaitRepo::getForfait($id);
 	if ($forfait == null) {
 		ob_end_flush();
-		header("location: /admin/index.php?forfaitInconnu");
+		redirect("../../connexion/index.php?forfaitInconnu");
 		exit;
 	}
 }
@@ -27,7 +28,7 @@ if (isset($_POST["btnEnregistrer"])) {
 		if ($id > 0) {
 			$forfait = ForfaitRepo::getForfait($id);
 			if ($forfait == null) {
-				header("location: /admin/index.php?forfaitInconnu");
+				redirect("../index.php?forfaitInconnu");
 				ob_end_flush();
 				exit;
 			}
@@ -41,7 +42,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 				echo $message;
 			} else {
-				header("location: /admin/tableaux/tabForfaits.php?Validation1");
+				redirect("../tableaux/tabForfaits.php?Validation1");
 				exit;
 			}
 		} else {
@@ -49,7 +50,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 				echo $message;
 			} else {
-				header("location: /admin/tableaux/tabForfaits.php?Validation2");
+				redirect("../tableaux/tabForfaits.php?Validation2");
 				exit;
 			}
 		}

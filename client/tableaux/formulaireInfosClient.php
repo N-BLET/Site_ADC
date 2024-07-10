@@ -1,6 +1,7 @@
 <?php
 require_once("./../../connexion/gestionSession.php");
-require_once("../header_footer/header.php");
+//require_once("../header_footer/header.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -25,7 +26,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			$client = ClientRepo::getClient($id);
 			if ($client == null) {
 				ob_end_flush();
-				header("location: /client/index.php?clientInconnu");
+				redirect("../../connexion/index.php?clientInconnu");
 				exit;
 			}
 		} else {
@@ -47,33 +48,25 @@ if (isset($_POST["btnEnregistrer"])) {
 			}
 		}
 
-		if ($id == 0) {
-			if (!ClientRepo::insert($client))
-				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else {
+		if ($id != 0) {
+			if (!ClientRepo::update($client)) {
+				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+			} else {
 				ob_end_flush();
-				header("location: /client/tableaux/infosClient.php");
+				redirect("./infosClient.php?validation");
 				exit;
 			}
 		} else {
-			if (!ClientRepo::update($client))
-				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
-			else {
-				ob_end_flush();
-				header("location: /client/tableaux/infosClient.php?validation");
-				exit;
-			}
+			$message = "<div class=\"alert alert-warning\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 		}
-	} else
-		$message = "<div class=\"alert alert-warning\" role=\"alert\">Erreur : Le formulaire n'est pas complet<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+	}
 }
 
 if (isset($_SESSION["Client"])) {
 	$client = ClientRepo::getClient($idClient);
 	if ($client == null)
-		header("location: /client/index.php?clientInconnu");
+		redirect("../../index.php?clientInconnu");
 }
-
 ?>
 
 <section class="page-section" id="formulaireInfosClient">
@@ -110,7 +103,7 @@ if (isset($_SESSION["Client"])) {
 					$option = "";
 					foreach ($lesVilles as $ville) {
 						$option .= "<option value= '" . $ville->getIdVille() . "'";
-						if ($client) {
+						if ($client->getIdClient() > 0 && $client->getVille()->getIdVille() == $ville->getIdVille()) {
 							$option .= "selected";
 						}
 						$option .= 	">" . $ville->getNomVille() . "</option>";
@@ -136,7 +129,7 @@ if (isset($_SESSION["Client"])) {
 					<a class="btn btn-dark" href='/client/tableaux/infosClient.php'>Annuler</a>
 				</div>
 				<div class="col-md-6 text-start">
-					<input type="submit" class="btn btn-success name=" btnEnregistrer" value="Enregistrer">
+					<input type="submit" class="btn btn-success" name="btnEnregistrer" value="Enregistrer">
 				</div>
 			</div>
 		</form>

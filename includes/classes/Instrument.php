@@ -3,10 +3,10 @@ class Instrument
 {
 
 	private $idInstrument;
-    private $typeInstrument;
+	private $typeInstrument;
 	private $marque;
 	private $modele;
-    private $numeroSerie;
+	private $numeroSerie;
 	private $dateAchat;
 	private $parcLocation;
 	private $client;
@@ -19,14 +19,14 @@ class Instrument
 	public function __construct(int $idInstrument, string $typeInstrument, string $marque, string $modele, string $numeroSerie, string $dateAchat, bool $parcLocation, ?int $fkIdClient, ?int $fkIdLocation)
 	{
 		$this->idInstrument = $idInstrument;
-        $this->typeInstrument = $typeInstrument;
+		$this->typeInstrument = $typeInstrument;
 		$this->marque = $marque;
 		$this->modele = $modele;
-        $this->numeroSerie = $numeroSerie;
+		$this->numeroSerie = $numeroSerie;
 		$this->dateAchat = strtotime($dateAchat);
 		$this->parcLocation = $parcLocation;
 		$this->client = is_null($fkIdClient) ? null : ClientRepo::getClient($fkIdClient);
-		if($fkIdClient != null && $parcLocation){
+		if ($fkIdClient != null && $parcLocation) {
 			$this->statutLocation = true;
 		}
 	}
@@ -42,7 +42,7 @@ class Instrument
 		$this->idInstrument = $idInstrument;
 	}
 
-    public function getTypeInstrument(): string
+	public function getTypeInstrument(): string
 	{
 		return $this->typeInstrument;
 	}
@@ -72,7 +72,7 @@ class Instrument
 		$this->modele = $modele;
 	}
 
-    public function getNumeroSerie(): string
+	public function getNumeroSerie(): string
 	{
 		return $this->numeroSerie;
 	}
@@ -82,7 +82,7 @@ class Instrument
 		$this->numeroSerie = $numeroSerie;
 	}
 
-    public function getDateAchat(): string
+	public function getDateAchat(): string
 	{
 		return $this->dateAchat;
 	}
@@ -127,10 +127,24 @@ class Instrument
 		return $this->parcLocation;
 	}
 
-	public function setParcLocation(bool $parcLocation)
+	public function getParcLocation()
 	{
-		$this->parcLocation = $parcLocation;
+		return $this->parcLocation;
 	}
+
+	public function setParcLocation($parcLocation)
+	{
+		if (empty($parcLocation)) {
+			$this->parcLocation = 0; // Utiliser 0 comme valeur par défaut
+		} else {
+			$this->parcLocation = (int) $parcLocation;
+		}
+	}
+
+	// public function setParcLocation(bool $parcLocation)
+	// {
+	// 	$this->parcLocation = $parcLocation;
+	// }
 
 	public function getLocation(): ?Location
 	{
@@ -161,5 +175,4 @@ class Instrument
 	{
 		$this->statutLocation = $isRent;
 	}
-	
 }

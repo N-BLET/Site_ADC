@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -11,7 +12,7 @@ if (isset($_GET["id"])) {
 	$id = protectionDonneesFormulaire($_GET["id"]);
 	$instruLoc = InstrumentRepo::getInstrumentLocation($id);
 	if ($instruLoc == null) {
-		header("location: /admin/formulaires/formulaireInstrument_Location.php?instrument_LocationInconnu");
+		redirect("../index.php?instrument_LocationInconnu");
 		ob_end_flush();
 		exit;
 	}
@@ -31,7 +32,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			$instruLoc = InstrumentRepo::getInstrumentLocation($id);
 			if ($instruLoc == null) {
 				ob_end_flush();
-				header("location: /admin/formulaires/formulaireInstrument_Location.php?instrument_LocationInconnu");
+				redirect("../../connexion/index.php?instrument_LocationInconnu");
 				exit;
 			}
 		}
@@ -48,7 +49,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				echo $message;
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabInstrument_Locations.php?Validation1");
+				redirect("../tableaux/tabInstrument_Locations.php?Validation1");
 				exit;
 			}
 		} else {
@@ -57,7 +58,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				echo $message;
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabInstrument_Locations.php?Validation2");
+				redirect("../tableaux/tabInstrument_Locations.php?Validation2");
 				exit;
 			}
 		}

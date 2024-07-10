@@ -1,6 +1,7 @@
 <?php
 require_once("../../connexion/gestionSession.php");
 require_once("../header_footer/headerAdmin.php");
+require_once("../../includes/utils.php");
 ob_start();
 
 // Gestion des variables de la page
@@ -16,7 +17,7 @@ if (isset($_GET["id"])) {
 	$location = LocationRepo::getLocation($id);
 	if ($location == null) {
 		ob_end_flush();
-		header("location: /admin/index.php?locationInconnue");
+		redirect("../index.php?locationInconnue");
 		exit;
 	}
 }
@@ -35,7 +36,7 @@ if (isset($_POST["btnEnregistrer"])) {
 			$location = LocationRepo::getLocation($id);
 			if ($location == null) {
 				ob_end_flush();
-				header("location: /admin/index.php?locationInconnue");
+				redirect("../../connexion/index.php?locationInconnue");
 				exit;
 			}
 		}
@@ -57,7 +58,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Insertion non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabLocations.php?Validation1");
+				redirect("../tableaux/tabLocations.php?Validation1");
 				exit;
 			}
 		} else {
@@ -65,7 +66,7 @@ if (isset($_POST["btnEnregistrer"])) {
 				$message = "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">Erreur : Modification non effectuée<button type=\"button\" class=\"btn-close\" data-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 			} else {
 				ob_end_flush();
-				header("location: /admin/tableaux/tabLocations.php?Validation2");
+				redirect("../tableaux/tabLocations.php?Validation2");
 				exit;
 			}
 		}

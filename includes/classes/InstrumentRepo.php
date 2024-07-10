@@ -6,13 +6,13 @@ class InstrumentRepo
 	public static $BD;
 	public static function getInstrument(int $idInstrument)
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
-		
+		}
+
 		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-				"FROM `INSTRUMENT` " .
-				"WHERE `INSTRUMENT`.idInstrument = :id;";
+			"FROM `INSTRUMENT` " .
+			"WHERE `INSTRUMENT`.idInstrument = :id;";
 
 		$instrument  = null;
 
@@ -28,86 +28,86 @@ class InstrumentRepo
 		return $instrument;
 	}
 
-		public static function getInstruments()
-		{
-			if(empty ($BD)){
-				$BD = connexionBD();
-			} 
-			
-			$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-			"FROM `INSTRUMENT` ";
-
-			$instruments  = array();
-
-			if ($requete = $BD->prepare($SQL)) {
-				if ($requete->execute()) {
-					while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
-						$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
-						array_push($instruments, $instrument);
-					}
-				} else
-					afficherErreurPDO(__FILE__, $requete);
-			}
-
-			return $instruments;
+	public static function getInstruments()
+	{
+		if (empty($BD)) {
+			$BD = connexionBD();
 		}
 
-		public static function getInstrumentsClient()
-		{
-			if(empty ($BD)){
-				$BD = connexionBD();
-			} 
-			
-			$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
 			"FROM `INSTRUMENT` ";
-			if (empty($_GET["q"])){
-				$SQL .= "WHERE `INSTRUMENT`.parcLocation = false ";
-			}
 
-			if (!empty($_GET["q"])) {
-				$lettres = protectionDonneesFormulaire($_GET["q"]);
-				$SQL .= "JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
-				"WHERE nom LIKE \"".$lettres."%\";";
-			}else if (!empty($_GET["r"])) {
-				$lettres = protectionDonneesFormulaire($_GET["r"]);
-				$SQL .= "AND numeroSerie LIKE \"".$lettres."%\";";
-			}
+		$instruments  = array();
 
-
-			$instruments  = array();
-
-			if ($requete = $BD->prepare($SQL)) {
-				if ($requete->execute()) {
-					while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
-						$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
-						array_push($instruments, $instrument);
-					}
-				} else
-					afficherErreurPDO(__FILE__, $requete);
-			}
-
-			return $instruments;
+		if ($requete = $BD->prepare($SQL)) {
+			if ($requete->execute()) {
+				while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
+					$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
+					array_push($instruments, $instrument);
+				}
+			} else
+				afficherErreurPDO(__FILE__, $requete);
 		}
+
+		return $instruments;
+	}
+
+	public static function getInstrumentsClient()
+	{
+		if (empty($BD)) {
+			$BD = connexionBD();
+		}
+
+		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+			"FROM `INSTRUMENT` ";
+		if (empty($_GET["q"])) {
+			$SQL .= "WHERE `INSTRUMENT`.parcLocation = false ";
+		}
+
+		if (!empty($_GET["q"])) {
+			$lettres = protectionDonneesFormulaire($_GET["q"]);
+			$SQL .= "JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
+				"WHERE nom LIKE \"" . $lettres . "%\";";
+		} else if (!empty($_GET["r"])) {
+			$lettres = protectionDonneesFormulaire($_GET["r"]);
+			$SQL .= "AND numeroSerie LIKE \"" . $lettres . "%\";";
+		}
+
+
+		$instruments  = array();
+
+		if ($requete = $BD->prepare($SQL)) {
+			if ($requete->execute()) {
+				while ($resultat = $requete->fetch(PDO::FETCH_ASSOC)) {
+					$instrument = new Instrument($resultat["idInstrument"], $resultat["typeInstrument"], $resultat["marque"], $resultat["modele"], $resultat["numeroSerie"], $resultat["dateAchat"], $resultat["parcLocation"], $resultat["fkIdClient"], $resultat["fkIdLocation"]);
+					array_push($instruments, $instrument);
+				}
+			} else
+				afficherErreurPDO(__FILE__, $requete);
+		}
+
+		return $instruments;
+	}
 
 	public static function getInstrumentsLocation()
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
-		
-        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-        "FROM `INSTRUMENT` ";
-		if (empty($_GET["q"])){
+		}
+
+		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+			"FROM `INSTRUMENT` ";
+		if (empty($_GET["q"])) {
 			$SQL .= "WHERE `INSTRUMENT`.parcLocation = true ";
 		}
 
 		if (!empty($_GET["q"])) {
 			$lettres = protectionDonneesFormulaire($_GET["q"]);
 			$SQL .= "JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
-			"WHERE nom LIKE \"".$lettres."%\";";
-		}else if (!empty($_GET["r"])) {
+				"WHERE nom LIKE \"" . $lettres . "%\";";
+		} else if (!empty($_GET["r"])) {
 			$lettres = protectionDonneesFormulaire($_GET["r"]);
-			$SQL .= "AND numeroSerie LIKE \"".$lettres."%\";";
+			$SQL .= "AND numeroSerie LIKE \"" . $lettres . "%\";";
 		}
 
 
@@ -128,13 +128,13 @@ class InstrumentRepo
 
 	public static function getInstrumentsLibresLocation()
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
-		
-        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-        "FROM `INSTRUMENT` WHERE `INSTRUMENT`.parcLocation = true AND `INSTRUMENT`.fkIdLocation is null;";
-	
+		}
+
+		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+			"FROM `INSTRUMENT` WHERE `INSTRUMENT`.parcLocation = true AND `INSTRUMENT`.fkIdLocation is null;";
+
 		$instruments  = array();
 
 		if ($requete = $BD->prepare($SQL)) {
@@ -155,8 +155,8 @@ class InstrumentRepo
 		$BD = connexionBD();
 
 		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-				"FROM `INSTRUMENT` " .
-				"WHERE `INSTRUMENT`.idInstrument = :id;";
+			"FROM `INSTRUMENT` " .
+			"WHERE `INSTRUMENT`.idInstrument = :id;";
 
 		$instruLoc  = null;
 
@@ -175,15 +175,15 @@ class InstrumentRepo
 
 	public static function getInstruSelonClient(int $idClient)
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
+		}
 
-        $SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
-		"FROM `INSTRUMENT` " .
-		"JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
-		"WHERE `CLIENT`.idClient = :id;";
-		
+		$SQL = "SELECT idInstrument, typeInstrument, marque, modele, numeroSerie, dateAchat, parcLocation, fkIdClient, fkIdLocation " .
+			"FROM `INSTRUMENT` " .
+			"JOIN `CLIENT` ON `INSTRUMENT`.fkIdClient = `CLIENT`.idClient " .
+			"WHERE `CLIENT`.idClient = :id;";
+
 		$instruments  = array();
 
 		if ($requete = $BD->prepare($SQL)) {
@@ -199,11 +199,11 @@ class InstrumentRepo
 		return $instruments;
 	}
 
-    public static function insert(Instrument $instrument)
+	public static function insert(Instrument $instrument)
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
+		}
 
 		$data = [
 			'idInstrument' => $instrument->getIdInstrument(),
@@ -212,13 +212,15 @@ class InstrumentRepo
 			'modele' => $instrument->getModele(),
 			'numeroSerie' => $instrument->getNumeroSerie(),
 			'dateAchat' => $instrument->getDateAchat(),
-			'fkIdClient' => $instrument->getFkIdClient() == 0 ? null : $instrument->getFkIdClient(),
-			'parcLocation' => $instrument->getFkIdClient() !== null ? false : true,
+			'parcLocation' => $instrument->getParcLocation(),
+			'fkIdClient' => $instrument->getFkIdClient() == null ? null : $instrument->getFkIdClient(),
 			'fkIdLocation' => null
 		];
-		
+		var_dump($data);
+
 
 		$SQL = "INSERT INTO `INSTRUMENT` (`idInstrument`, `typeInstrument`, `marque`, `modele`, `numeroSerie`, `dateAchat`, `parcLocation`, `fkIdClient`, `fkIdLocation`) VALUES (:idInstrument, :typeInstrument, :marque, :modele, :numeroSerie, :dateAchat, :parcLocation, :fkIdClient, :fkIdLocation);";
+		var_dump($SQL);
 		if ($requete = $BD->prepare($SQL)) {
 			if ($requete->execute($data)) {
 				$instrument->setIdInstrument($BD->lastInsertId());
@@ -228,20 +230,20 @@ class InstrumentRepo
 		}
 		return false;
 	}
-	
-    public static function update(Instrument $instrument)
+
+	public static function update(Instrument $instrument)
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
+		}
 
 		$data = [
 			'idInstrument' => $instrument->getIdInstrument(),
 			'typeInstrument' => ucwords($instrument->getTypeInstrument()),
-			'marque' => strtoupper ($instrument->getMarque()),
+			'marque' => strtoupper($instrument->getMarque()),
 			'modele' => ucfirst(strtolower($instrument->getModele())),
-            'numeroSerie' => $instrument->getNumeroSerie(),
-            'dateAchat' => $instrument->getDateAchat(),
+			'numeroSerie' => $instrument->getNumeroSerie(),
+			'dateAchat' => $instrument->getDateAchat(),
 			'fkIdClient' => $instrument->getFkIdClient()
 		];
 
@@ -255,11 +257,11 @@ class InstrumentRepo
 		return false;
 	}
 
-    public static function delete(Instrument $instrument)
+	public static function delete(Instrument $instrument)
 	{
-		if(empty ($BD)){
+		if (empty($BD)) {
 			$BD = connexionBD();
-		} 
+		}
 
 		$data = [
 			'idInstrument' => $instrument->getIdInstrument()
@@ -274,5 +276,4 @@ class InstrumentRepo
 		}
 		return false;
 	}
-
 }
