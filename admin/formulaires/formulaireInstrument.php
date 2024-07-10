@@ -1,6 +1,6 @@
 <?php
 require_once("../../connexion/gestionSession.php");
-//require_once("../header_footer/headerAdmin.php");
+require_once("../header_footer/headerAdmin.php");
 require_once("../../includes/utils.php");
 ob_start();
 
