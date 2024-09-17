@@ -340,6 +340,7 @@ button,
 [type=button],
 [type=reset],
 [type=submit] {
+  appearance: button;
   -webkit-appearance: button;
 }
 button:not(:disabled),
@@ -398,6 +399,7 @@ legend + * {
 
 [type=search] {
   outline-offset: -2px;
+  appearance: textfield;
   -webkit-appearance: textfield;
 }
 
@@ -2386,7 +2388,6 @@ textarea.form-control-lg {
   float: left;
   margin-left: -1.5em;
 }
-
 .form-check-input {
   width: 1em;
   height: 1em;
@@ -2397,12 +2398,15 @@ textarea.form-control-lg {
   background-position: center;
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  -webkit-print-color-adjust: exact;
-          color-adjust: exact;
+
+  appearance: none; /* Utilisation sans préfixe */
+  -webkit-appearance: none; /* Fallback pour anciens navigateurs WebKit */
+  -moz-appearance: none; /* Fallback pour anciens navigateurs Mozilla */
+
+  -webkit-print-color-adjust: exact; /* Fallback pour anciens navigateurs WebKit */
+          print-color-adjust: exact; /* Standardisation */
 }
+
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;
 }
@@ -10984,7 +10988,7 @@ p {
     margin-right: 0;
   }
 }
-header.masthead {
+/*header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
@@ -10994,7 +10998,27 @@ header.masthead {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
+}*/
+header.masthead {
+  padding-top: 10.5rem;
+  padding-bottom: 6rem;
+  text-align: center;
+  color: #fff;
+  background-image: url("../assets/img/header_clarinet.webp");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
+  height: 100vh; /* Définit la hauteur à 100% de la hauteur de l'écran */
 }
+
+/* Fallback pour les navigateurs qui ne supportent pas WebP */
+@supports not (background-image: url("../assets/img/header_clarinet.webp")) {
+  header.masthead {
+    background-image: url("../assets/img/header_clarinet.jpg"); /* Image JPG */
+  }
+}
+
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
   font-style: italic;
@@ -11010,7 +11034,67 @@ header.masthead .masthead-heading {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+@media (max-width: 576px) {
+  header.masthead {
+    padding-top: 4rem;
+    padding-bottom: 2.5rem;
+    background-size: contain;
+    background-position: center;
+  }
+  header.masthead .masthead-subheading {
+    font-size: 1.25rem; /* Plus petit texte pour les écrans réduits */
+    line-height: 1.25rem;
+    margin-bottom: 20px;
+  }
+  header.masthead .masthead-heading {
+    font-size: 2.5rem; /* Diminution de la taille de la police */
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Media Query pour les écrans moyens (max-width: 768px) */
+@media (max-width: 768px) {
+  header.masthead {
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+    background-position: top center;
+    background-size: cover; /* Pour occuper tout l'espace */
+    background-position: top center;
+  }
+  header.masthead .masthead-subheading {
+    font-size: 1.75rem; /* Légère augmentation de la taille du texte */
+    line-height: 1.75rem;
+    margin-bottom: 25px;
+  }
+  header.masthead .masthead-heading {
+    font-size: 3.75rem;
+    line-height: 3.75rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Media Query pour les grands écrans (min-width: 768px) */
 @media (min-width: 768px) {
+  header.masthead {
+    padding-top: 17rem;
+    padding-bottom: 12.5rem;
+    background-position: center center;
+    background-size: cover;
+  }
+  header.masthead .masthead-subheading {
+    font-size: 2.25rem;
+    line-height: 2.25rem;
+    margin-bottom: 2rem;
+  }
+  header.masthead .masthead-heading {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+    margin-bottom: 4rem;
+  }
+}
+
+/*@media (min-width: 768px) {
   header.masthead {
     padding-top: 17rem;
     padding-bottom: 12.5rem;
@@ -11027,7 +11111,7 @@ header.masthead .masthead-heading {
     line-height: 4.5rem;
     margin-bottom: 4rem;
   }
-}
+}*/
 #portfolio .portfolio-item {
   max-width: 26rem;
   margin-left: auto;
